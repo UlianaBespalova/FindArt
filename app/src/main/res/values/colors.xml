@@ -10,4 +10,5 @@
 
     <color name="beige_normal">#FFF2E3C7</color>
     <color name="dark_gray">#FF2C2A2B</color>
+    <color name="transparent_white">#CDF1EAEA</color>
 </resources>
