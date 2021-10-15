@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/beige_normal">
-
+    android:background="@color/beige_normal"
+    >
 
     <androidx.percentlayout.widget.PercentFrameLayout
         android:layout_width="wrap_content"
@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:src="@drawable/main_image"
-            app:layout_heightPercent="70%" />
+            app:layout_heightPercent="70%"
+            />
 
         <androidx.percentlayout.widget.PercentRelativeLayout
             android:layout_width="wrap_content"
@@ -84,5 +85,23 @@
             app:layout_marginBottomPercent="5%"
             />
     </androidx.percentlayout.widget.PercentFrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/main_screen_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/bookmarks"
+        app:srcCompat="@drawable/icon_bookmark_normal"
+        app:backgroundTint="@color/transparent_white"
+         />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

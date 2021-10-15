@@ -13,8 +13,11 @@
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.109375" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.13072916666666667" />
         <entry key="app/src/main/res/layout/main_screen.xml" value="0.13" />
+<<<<<<< HEAD
         <entry key="app/src/main/res/layout/upload_screen.xml" value="0.11171875" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.18" />
+=======
+>>>>>>> ab887115d2555b869888cd64eed7c780d7f88d3d
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.16927083333333334" />
       </map>
     </option>
