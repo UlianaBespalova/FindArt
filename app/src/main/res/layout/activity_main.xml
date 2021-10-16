@@ -7,22 +7,36 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <androidx.percentlayout.widget.PercentFrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"
+        app:layout_heightPercent="100%"
+        />
+    </androidx.percentlayout.widget.PercentFrameLayout>
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.FindArt.AppBarOverlay">
-
+        android:theme="@style/Theme.FindArt.Transparent"
+        app:elevation="0dp"
+        >
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="@color/beige_additional"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/Theme.FindArt.PopupOverlay"
             />
     </com.google.android.material.appbar.AppBarLayout>
-
-<!--    <include layout="@layout/main_screen" />-->
     <include layout="@layout/upload_screen" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
