@@ -19,4 +19,9 @@
     <string name="choose_image">Выбрать фото</string>
     <string name="bookmarks">Закладки</string>
 
+    <string name="uploaded_image">Загруженное изображение</string>
+    <string name="choose_another">Выбрать другое</string>
+    <string name="edit">Редактировать</string>
+    <string name="find">Найти!</string>
+
 </resources>

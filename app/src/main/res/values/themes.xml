@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.FindArt" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/beige_additional</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/beige_normal</item>
+        <item name="colorPrimaryVariant">@color/beige_additional</item>
         <item name="colorOnPrimary">@color/dark_gray</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -16,16 +16,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.FindArt.Transparent" parent="Theme.FindArt">
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="windowActionBarOverlay">true</item>
-        <item name="colorPrimary">@android:color/transparent</item>
-
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:backgroundStacked">@android:color/transparent</item>
-    </style>
 
 
     <style name="Theme.FindArt.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

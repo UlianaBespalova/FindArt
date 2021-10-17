@@ -97,7 +97,7 @@
         android:clickable="true"
         android:focusable="true"
         android:contentDescription="@string/bookmarks"
-        app:srcCompat="@drawable/icon_bookmark_normal"
+        app:srcCompat="@drawable/ic_bookmark_outline_black_24dp"
         app:backgroundTint="@color/transparent_white"
          />
 
