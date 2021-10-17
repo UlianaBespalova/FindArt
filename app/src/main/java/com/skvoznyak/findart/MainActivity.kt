@@ -1,6 +1,5 @@
 package com.skvoznyak.findart
 
-import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -14,6 +13,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -38,6 +39,8 @@ class MainActivity : AppCompatActivity() {
                             or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
             @Suppress("DEPRECATION")
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         }
     }
 }
