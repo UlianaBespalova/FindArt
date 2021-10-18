@@ -2,9 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/label"
+        android:title="@string/bookmarks"
+        app:showAsAction="ifRoom"
+        />
+    <item
         android:id="@+id/action_bookmarks"
-        app:showAsAction="always"
         android:icon="@drawable/ic_bookmark_outline_black_24dp"
         android:title="@string/bookmarks"
+        app:showAsAction="always"
         />
 </menu>
+
+<!--TODO: Сделать закрашенную иконку-->

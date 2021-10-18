@@ -1,6 +1,5 @@
 package com.skvoznyak.findart
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +14,7 @@ class ContentActivity:AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.results_screen)
+        setContentView(R.layout.list_screen)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -31,9 +30,7 @@ class ContentActivity:AppCompatActivity() {
         resultList.isNestedScrollingEnabled = true;
         val pictureAdapter = PictureAdapter(resultsMock())
         val headerAdapter = HeaderAdapter()
-
-
-//        val concatAdapter = ConcatAdapter(headerAdapter, pictureAdapter)
+        //        resultList.adapter = pictureAdapter
         resultList.adapter = ConcatAdapter(headerAdapter, pictureAdapter)
         resultList.layoutManager = LinearLayoutManager(this)
     }

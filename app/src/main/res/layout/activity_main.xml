@@ -28,6 +28,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 <!--        <include layout="@layout/upload_screen" />-->
-        <include layout="@layout/results_screen" />
+        <include layout="@layout/list_screen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

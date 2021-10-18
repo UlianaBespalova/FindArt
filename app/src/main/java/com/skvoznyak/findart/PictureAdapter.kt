@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 class PictureAdapter(private val pictures: List<Picture>): Adapter<PictureAdapter.PictureViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.picture, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.picture_item, parent, false)
         return PictureViewHolder(view)
     }
 
@@ -43,7 +42,7 @@ class HeaderAdapter: RecyclerView.Adapter<HeaderAdapter.HeaderViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeaderViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.results_header, parent, false)
+            .inflate(R.layout.list_header, parent, false)
         return HeaderViewHolder(view)
     }
 
