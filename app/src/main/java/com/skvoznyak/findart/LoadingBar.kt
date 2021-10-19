@@ -16,7 +16,7 @@ import android.view.animation.Transformation
 class LoadingBar : View {
 
     private val dotRadius = 9
-    private val bounceDotRadius = 12
+    private val bounceDotRadius = 15
     private val dotAmount = 6
     private var dotPosition = 0
 
@@ -42,16 +42,28 @@ class LoadingBar : View {
         startAnimation()
     }
 
-    @SuppressLint("ResourceAsColor")
     private fun createDot(canvas: Canvas, paint: Paint) {
-
         for (i in 0 until dotAmount) {
             if (i == dotPosition) {
-                paint.color = Color.parseColor("#FFFFF0C8")
+                paint.color = Color.parseColor("#11FFF0C8")
                 canvas.drawCircle(
                     (2 * dotRadius + i * dotsDistributionX),
                     bounceDotRadius.toFloat(),
                     bounceDotRadius.toFloat(),
+                    paint)
+
+                paint.color = Color.parseColor("#55FFF0C8")
+                canvas.drawCircle(
+                    (2 * dotRadius + i * dotsDistributionX),
+                    bounceDotRadius.toFloat(),
+                    dotRadius.toFloat()+3,
+                    paint)
+
+                paint.color = Color.parseColor("#FFFFF0C8")
+                canvas.drawCircle(
+                    (2 * dotRadius + i * dotsDistributionX),
+                    bounceDotRadius.toFloat(),
+                    dotRadius.toFloat(),
                     paint)
             } else {
                 paint.color = Color.parseColor("#FF707070")
