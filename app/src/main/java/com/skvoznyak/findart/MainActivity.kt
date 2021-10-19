@@ -4,32 +4,44 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Build
 import android.os.Bundle
-import android.view.Menu
+import android.view.*
 
-import android.view.View
-import android.view.WindowInsets
-import android.view.WindowInsetsController
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.viewbinding.ViewBinding
 import com.skvoznyak.findart.databinding.ActivityMainBinding
+import com.skvoznyak.findart.databinding.LayoutToolbarBinding
+//Оставить здесь только базовую логику.
+//Наследование:
+//Класс страницы загрузки и класс страницы со списком.
+//Для первого экрана своя активя с функцией hideSystemUI
+open class MainActivity : AppCompatActivity() {
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var mainBinding: ActivityMainBinding
+    protected lateinit var toolbarBinding: LayoutToolbarBinding
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        addActivity()
+        addToolbar()
+    }
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+    protected open fun addActivity() {
+        mainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mainBinding.root)
+    }
 
+    protected open fun addToolbar() { //TODO: передача стиля как параметра
+        toolbarBinding = LayoutToolbarBinding.inflate(layoutInflater)
+        addContentView(toolbarBinding.root, ViewGroup.LayoutParams(
+            ViewGroup
+            .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+
+        setSupportActionBar(toolbarBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        binding.toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_left_black_24dp)
+        toolbarBinding.toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_left_black_24dp)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -2,27 +2,34 @@ package com.skvoznyak.findart
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.skvoznyak.findart.databinding.ActivityMainBinding
+import com.skvoznyak.findart.databinding.LayoutToolbarBinding
+
 
 class ContentActivity:AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var mainBinding: ActivityMainBinding
+    private lateinit var toolbarBinding: LayoutToolbarBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.list_screen)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+        mainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mainBinding.root)
 
+        toolbarBinding = LayoutToolbarBinding.inflate(layoutInflater)
+        addContentView(toolbarBinding.root, ViewGroup.LayoutParams(ViewGroup
+            .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+
+        setSupportActionBar(toolbarBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        binding.toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_left_black_24dp)
+        toolbarBinding.toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_left_black_24dp)
 
 
         val resultList:RecyclerView = findViewById(R.id.resultList)
@@ -35,10 +42,10 @@ class ContentActivity:AppCompatActivity() {
         resultList.layoutManager = LinearLayoutManager(this)
     }
 
-        override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-            menuInflater.inflate(R.menu.menu, menu)
-            return true
-        }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
 
 
 

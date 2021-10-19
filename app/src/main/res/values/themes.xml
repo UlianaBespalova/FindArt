@@ -27,8 +27,6 @@
         <item name="android:background">@color/transparent_gray</item>
     </style>
 
-
-
     <style name="Theme.FindArt.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.FindArt.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
