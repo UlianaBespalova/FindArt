@@ -9,6 +9,6 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
-<!--        <include layout="@layout/upload_screen" />-->
-        <include layout="@layout/list_screen" />
+        <include layout="@layout/upload_screen" />
+<!--        <include layout="@layout/list_screen" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

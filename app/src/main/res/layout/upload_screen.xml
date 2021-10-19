@@ -47,12 +47,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/uploaded_image"
-        android:src="@drawable/picture_mock2"
         app:layout_constraintEnd_toStartOf="@id/guideline3"
         app:layout_constraintStart_toStartOf="@id/guideline2"
         app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal"
         app:layout_constraintTop_toTopOf="@id/guideline_topHorizontal"
         android:scaleType="centerCrop"
+        tools:src="@drawable/picture_mock2"
         />
     <Button
         android:id="@+id/button_edit"
@@ -103,6 +103,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_find"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/main_button"

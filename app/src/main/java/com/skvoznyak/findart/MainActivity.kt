@@ -1,14 +1,11 @@
 package com.skvoznyak.findart
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import android.view.*
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.viewbinding.ViewBinding
 import com.skvoznyak.findart.databinding.ActivityMainBinding
 import com.skvoznyak.findart.databinding.LayoutToolbarBinding
 //Оставить здесь только базовую логику.
