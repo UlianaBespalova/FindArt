@@ -105,11 +105,11 @@
         android:layout_marginTop="15dp"
         android:clickable="true"
         android:contentDescription="@string/bookmarks"
+        app:srcCompat="@drawable/ic_bookmark_outline_black_24dp"
         android:focusable="true"
         app:backgroundTint="@color/transparent_white"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon_bookmark_normal" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
