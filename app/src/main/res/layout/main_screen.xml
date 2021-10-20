@@ -1,107 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/beige_normal"
-    >
+    android:background="@color/beige_normal">
 
-    <androidx.percentlayout.widget.PercentFrameLayout
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/title_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/main_image"
-            app:layout_heightPercent="70%"
-            />
-
-        <androidx.percentlayout.widget.PercentRelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="10dp"
-            app:layout_marginTopPercent="71%">
-
-            <TextView
-                android:id="@+id/app_title_find"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/avenir_light"
-                android:text="@string/app_title_find"
-                android:textColor="@color/dark_gray"
-                android:textSize="65sp" />
-
-            <TextView
-                android:id="@+id/app_title_dot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="-4dp"
-                android:layout_marginEnd="5dp"
-                android:layout_toEndOf="@id/app_title_find"
-                android:fontFamily="@font/avenir_light"
-                android:text="@string/dot"
-                android:textColor="@color/dark_gray"
-                android:textSize="70sp" />
-
-            <TextView
-                android:id="@+id/app_title_art"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/app_title_dot"
-                android:fontFamily="@font/avenir_light"
-                android:text="@string/app_title_art"
-                android:textColor="@color/dark_gray"
-                android:textSize="65sp" />
-        </androidx.percentlayout.widget.PercentRelativeLayout>
-
-    </androidx.percentlayout.widget.PercentFrameLayout>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
 
 
-    <androidx.percentlayout.widget.PercentFrameLayout
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottomHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="15dp" />
+
+    <ImageView
+        android:id="@+id/title_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="150dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/app_choose_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/gill_sans"
-            android:text="@string/choose_image"
-            android:textColor="@color/dark_gray"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_marginBottomPercent="5%"
-            />
-    </androidx.percentlayout.widget.PercentFrameLayout>
+
+    <TextView
+        android:id="@+id/app_title_find"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir_light"
+        android:text="@string/app_title_find"
+        android:textColor="@color/dark_gray"
+        android:textSize="65sp"
+        app:layout_constraintBaseline_toTopOf="@id/guideline_horizontal1"
+        app:layout_constraintEnd_toStartOf="@id/app_title_dot"
+
+        />
+
+    <TextView
+        android:id="@+id/app_title_dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir_light"
+        android:text="@string/dot"
+        android:textColor="@color/dark_gray"
+        android:textSize="70sp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBaseline_toTopOf="@id/guideline_horizontal1"
+        app:layout_constraintBottom_toBottomOf="@+id/app_title_find"
+        app:layout_constraintStart_toEndOf="@id/app_title_find"
+        app:layout_constraintTop_toTopOf="@+id/app_title_find" />
+
+    <TextView
+        android:id="@+id/app_title_art"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir_light"
+        android:text="@string/app_title_art"
+        android:textColor="@color/dark_gray"
+        android:textSize="65sp"
+        app:layout_constraintBottom_toBottomOf="@+id/app_title_dot"
+        app:layout_constraintStart_toEndOf="@id/app_title_dot"
+        app:layout_constraintTop_toTopOf="@+id/app_title_dot"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBaseline_toTopOf="@id/guideline_horizontal1"
+        />
+
+    <TextView
+        android:id="@+id/app_choose_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gill_sans"
+        android:text="@string/choose_image"
+        android:textColor="@color/dark_gray"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBaseline_toTopOf="@id/guideline_bottomHorizontal"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/main_screen_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="15dp"
         android:clickable="true"
-        android:focusable="true"
         android:contentDescription="@string/bookmarks"
         app:srcCompat="@drawable/ic_bookmark_outline_black_24dp"
+        android:focusable="true"
         app:backgroundTint="@color/transparent_white"
-         />
-
-
-
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
