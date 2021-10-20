@@ -19,4 +19,13 @@
         app:fontWeight="100"
         app:font="@font/gill_sans"
         />
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="100"
+        android:font="@font/baskerville"
+        app:fontStyle="normal"
+        app:fontWeight="100"
+        app:font="@font/baskerville"
+        />
 </font-family>
