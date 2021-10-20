@@ -10,14 +10,18 @@ import android.content.pm.PackageManager
 import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.os.Build
-import android.os.Environment.getExternalStorageDirectory
+import android.os.Environment
 import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
+import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import com.skvoznyak.findart.databinding.ActivityMainBinding
+import com.skvoznyak.findart.databinding.LayoutToolbarBinding
 import com.skvoznyak.findart.databinding.UploadScreenBinding
 import java.io.*
 
@@ -33,18 +37,38 @@ class UploadImageActivity : MainActivity() {
     private val TAKE_PHOTO = "Сделать фото"
     private val CHOOSE_FROM_GALLERY = "Выбрать из Галереи"
     private val CANCEL = "Отмена"
-    private val ACTIONS = arrayOf<CharSequence>(TAKE_PHOTO, CHOOSE_FROM_GALLERY, CANCEL)
+    private val ACTIONS = arrayOf<CharSequence>(CHOOSE_FROM_GALLERY, TAKE_PHOTO, CANCEL)
     private var userChosenTask = ""
+
+    private val fileName = "photo"
+    lateinit var storageDirectory: File
+    lateinit var imageFile: File
+    lateinit var currentPhotoPath: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        uploadImageBinding = UploadScreenBinding.inflate(layoutInflater)
-        setContentView(uploadImageBinding.root)
+        addContent()
 
         //Вынести весь этот функицонал в отдельный файл
+        storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+        imageFile = File.createTempFile(fileName, ".jpg", storageDirectory)
+        currentPhotoPath = imageFile.absolutePath
+
         uploadImageBinding.buttonChooseAnother.setOnClickListener {
             selectImage()
         }
+    }
+
+
+    private fun addContent() {
+        uploadImageBinding = UploadScreenBinding.inflate(layoutInflater)
+        addContentView(
+            uploadImageBinding.root, ViewGroup.LayoutParams(
+                ViewGroup
+                    .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        )
     }
 
 
@@ -94,41 +118,13 @@ class UploadImageActivity : MainActivity() {
             }
         }
         uploadImageBinding.uploadedImage.setImageBitmap(bm)
-//        if (bm != null) saveImage(bm)
     }
 
     private fun onCaptureImageResult(data: Intent?) {
-        if (data == null) return
-        val thumbnail = data.extras!!.get("data") as Bitmap
-        uploadImageBinding.uploadedImage.setImageBitmap(thumbnail)
-//        saveImage(thumbnail)
+        val bm: Bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+        uploadImageBinding.uploadedImage.setImageBitmap(bm)
     }
 
-//    private fun saveImage(bitmap: Bitmap) {
-//
-//        val bytes = ByteArrayOutputStream()
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes)
-//
-//        // create a directory if it doesn't already exist
-//        val photoDirectory = File(getExternalStorageDirectory().absolutePath + "/cameraphoto/")
-//        if (!photoDirectory.exists()) {
-//            photoDirectory.mkdirs()
-//        }
-//        val destination = File(photoDirectory,   "captured_photo.jpg")
-//        Log.d("photo path:", destination.absolutePath)
-//        val fo: FileOutputStream
-//        try {
-//            destination.createNewFile()
-//            fo = FileOutputStream(destination)
-//            fo.write(bytes.toByteArray())
-//            fo.close()
-//        } catch (e: FileNotFoundException) {
-//            e.printStackTrace()
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//        }
-//    }
-//
 
     private fun selectImage() {
         val builder = AlertDialog.Builder(this)
@@ -155,7 +151,9 @@ class UploadImageActivity : MainActivity() {
 
 
     private fun cameraIntent() {
+        val imageUri = FileProvider.getUriForFile(this@UploadImageActivity, "com.skvoznyak.findart.fileprovider", imageFile)
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
         startActivityForResult(intent, ACTIVITY_RESULT_CODE_REQUEST_CAMERA)
     }
 
@@ -172,9 +170,10 @@ class UploadImageActivity : MainActivity() {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     val alertBuilder = AlertDialog.Builder(context)
+                    Log.d("ivan", "Permission 2")
                     alertBuilder.setCancelable(true)
-                    alertBuilder.setTitle("Permission Needed")
-                    alertBuilder.setMessage("External storage permission is needed to proceed.")
+                    alertBuilder.setTitle("Требуется разрешение")
+                    alertBuilder.setMessage("Для выполнения действия приложению необходим доступ к фото.")
                     alertBuilder.setPositiveButton(android.R.string.yes) { _, _ ->
                         ActivityCompat.requestPermissions(context, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
                     }

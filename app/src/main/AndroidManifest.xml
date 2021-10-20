@@ -3,9 +3,11 @@
     package="com.skvoznyak.findart">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -37,10 +39,11 @@
         <provider
             android:authorities="com.skvoznyak.findart.fileprovider"
             android:name="androidx.core.content.FileProvider"
-            android:exported="true"
+            android:exported="false"
             android:grantUriPermissions="true">
 
-            <meta-data android:name="">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
         </provider>
 
     </application>
