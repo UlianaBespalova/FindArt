@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.35" />
 
-    <com.skvoznyak.findart.LoadingBar
+    <com.skvoznyak.findart.utils.LoadingBar
         android:id="@+id/horizontalDottedProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

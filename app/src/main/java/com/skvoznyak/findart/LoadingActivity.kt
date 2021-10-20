@@ -7,7 +7,7 @@ import com.skvoznyak.findart.databinding.LayoutToolbarBinding
 import com.skvoznyak.findart.databinding.LoadingScreenBinding
 
 
-class LoadingActivity : MainActivity() {
+class LoadingActivity : BaseActivity() {
 
     private lateinit var loadingBinding: LoadingScreenBinding
     private lateinit var progressBar: View

@@ -20,13 +20,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import com.skvoznyak.findart.databinding.ActivityMainBinding
-import com.skvoznyak.findart.databinding.LayoutToolbarBinding
 import com.skvoznyak.findart.databinding.UploadScreenBinding
 import java.io.*
 
 
-class UploadImageActivity : MainActivity() {
+class UploadImageActivity : BaseActivity() {
 
     private lateinit var uploadImageBinding: UploadScreenBinding
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 10001

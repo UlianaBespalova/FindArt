@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.skvoznyak.findart.adapters.Picture
 
 
 class PictureAdapter(private val pictures: List<Picture>): Adapter<PictureAdapter.PictureViewHolder>() {

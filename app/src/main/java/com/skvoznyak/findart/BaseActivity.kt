@@ -12,7 +12,7 @@ import com.skvoznyak.findart.databinding.LayoutToolbarBinding
 //Наследование:
 //Класс страницы загрузки и класс страницы со списком.
 //Для первого экрана своя активя с функцией hideSystemUI
-open class MainActivity : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity() {
 
     private lateinit var mainBinding: ActivityMainBinding
     protected lateinit var toolbarBinding: LayoutToolbarBinding

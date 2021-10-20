@@ -1,35 +1,21 @@
 package com.skvoznyak.findart
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.skvoznyak.findart.databinding.ActivityMainBinding
-import com.skvoznyak.findart.databinding.LayoutToolbarBinding
+import com.skvoznyak.findart.adapters.Picture
+import com.skvoznyak.findart.databinding.ListScreenBinding
 
 
-class ContentActivity:AppCompatActivity() {
+class ContentActivity:BaseActivity() {
 
-    private lateinit var mainBinding: ActivityMainBinding
-    private lateinit var toolbarBinding: LayoutToolbarBinding
+    private lateinit var listScreenBinding: ListScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mainBinding.root)
-
-        toolbarBinding = LayoutToolbarBinding.inflate(layoutInflater)
-        addContentView(toolbarBinding.root, ViewGroup.LayoutParams(ViewGroup
-            .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
-
-        setSupportActionBar(toolbarBinding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbarBinding.toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_left_black_24dp)
+        addContent()
 
 
         val resultList:RecyclerView = findViewById(R.id.resultList)
@@ -42,11 +28,16 @@ class ContentActivity:AppCompatActivity() {
         resultList.layoutManager = LinearLayoutManager(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
-    }
 
+    private fun addContent() {
+        listScreenBinding = ListScreenBinding.inflate(layoutInflater)
+        addContentView(
+            listScreenBinding.root, ViewGroup.LayoutParams(
+                ViewGroup
+                    .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        )
+    }
 
 
     private fun resultsMock():List<Picture> {
