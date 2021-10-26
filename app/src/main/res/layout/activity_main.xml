@@ -9,5 +9,4 @@
     android:background="@drawable/background"
     tools:context=".BaseActivity">
 
-<!--        <include layout="@layout/list_screen" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

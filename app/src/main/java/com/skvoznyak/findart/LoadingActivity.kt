@@ -25,7 +25,7 @@ class LoadingActivity : BaseActivity() {
 
     @SuppressLint("ResourceAsColor")
     override fun addToolbar() { //TODO: передача стиля как параметра?
-        toolbarBinding = LayoutToolbarBinding.inflate(layoutInflater)
+        val toolbarBinding = LayoutToolbarBinding.inflate(layoutInflater)
         addContentView(toolbarBinding.root, ViewGroup.LayoutParams(
             ViewGroup
                 .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))

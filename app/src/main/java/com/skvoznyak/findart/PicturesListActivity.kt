@@ -1,6 +1,7 @@
 package com.skvoznyak.findart
 
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,7 +10,7 @@ import com.skvoznyak.findart.adapters.Picture
 import com.skvoznyak.findart.databinding.ListScreenBinding
 
 
-class ContentActivity:BaseActivity() {
+class PicturesListActivity :BaseActivity() {
 
     private lateinit var listScreenBinding: ListScreenBinding
 
@@ -17,19 +18,21 @@ class ContentActivity:BaseActivity() {
         super.onCreate(savedInstanceState)
         addContent()
 
-
         val resultList:RecyclerView = findViewById(R.id.resultList)
-
-        resultList.isNestedScrollingEnabled = true;
+        resultList.isNestedScrollingEnabled = true
         val pictureAdapter = PictureAdapter(resultsMock())
-        val headerAdapter = HeaderAdapter()
-        //        resultList.adapter = pictureAdapter
-        resultList.adapter = ConcatAdapter(headerAdapter, pictureAdapter)
+
+        if (intent.extras?.get("headerFlag") as? Boolean == true) {
+            val headerAdapter = HeaderAdapter()
+            resultList.adapter = ConcatAdapter(headerAdapter, pictureAdapter)
+        } else {
+            resultList.adapter = pictureAdapter
+        }
         resultList.layoutManager = LinearLayoutManager(this)
     }
 
 
-    private fun addContent() {
+    private fun addContent() { //TODO: превратить в фрагмент
         listScreenBinding = ListScreenBinding.inflate(layoutInflater)
         addContentView(
             listScreenBinding.root, ViewGroup.LayoutParams(
