@@ -84,7 +84,7 @@
         />
 
     <TextView
-        android:id="@+id/app_choose_image"
+        android:id="@+id/button_choose_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/gill_sans"
@@ -98,9 +98,9 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_bookmarks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="40dp"
         android:clickable="true"
         android:contentDescription="@string/bookmarks"
         app:srcCompat="@drawable/ic_bookmark_outline_black_24dp"

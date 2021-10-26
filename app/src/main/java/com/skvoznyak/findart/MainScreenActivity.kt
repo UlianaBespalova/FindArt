@@ -1,13 +1,15 @@
 package com.skvoznyak.findart
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
+import com.skvoznyak.findart.databinding.ActivityMainBinding
 import com.skvoznyak.findart.databinding.MainScreenBinding
 
-class MainScreenActivity : AppCompatActivity() {
+
+class MainScreenActivity : GetImage() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,10 +19,26 @@ class MainScreenActivity : AppCompatActivity() {
 
         mainScreenBinding.buttonBookmarks.setOnClickListener {
             val intent = Intent(this@MainScreenActivity, PicturesListActivity::class.java)
-            intent.putExtra("headerFlag", true)
+            startActivity(intent)
+        }
+        mainScreenBinding.buttonChooseImage.setOnClickListener {
+            selectImage()
+        }
+    }
+
+    override fun addToolbar() { }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            val intent = Intent(this@MainScreenActivity, UploadImageActivity::class.java)
+            intent.putExtra("requestCode", requestCode)
+            intent.putExtra("data", data)
+            intent.putExtra("currentPhotoPath", currentPhotoPath)
             startActivity(intent)
         }
     }
+
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
