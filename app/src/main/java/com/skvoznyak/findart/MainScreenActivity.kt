@@ -6,24 +6,31 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import com.skvoznyak.findart.databinding.ActivityMainBinding
+import com.skvoznyak.findart.databinding.LoadingScreenBinding
 import com.skvoznyak.findart.databinding.MainScreenBinding
 
 
 class MainScreenActivity : GetImage() {
 
+    lateinit var mainScreenBinding : MainScreenBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val mainScreenBinding = MainScreenBinding.inflate(layoutInflater)
-        setContentView(mainScreenBinding.root)
 
         mainScreenBinding.buttonBookmarks.setOnClickListener {
             val intent = Intent(this@MainScreenActivity, PicturesListActivity::class.java)
             startActivity(intent)
         }
         mainScreenBinding.buttonChooseImage.setOnClickListener {
-            selectImage()
+//            selectImage()
+            val intent = Intent(this@MainScreenActivity, UploadImageActivity::class.java)
+            startActivity(intent)
         }
+    }
+
+    override fun addActivity() {
+        mainScreenBinding = MainScreenBinding.inflate(layoutInflater)
+        setContentView(mainScreenBinding.root)
     }
 
     override fun addToolbar() { }

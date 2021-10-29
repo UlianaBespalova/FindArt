@@ -1,6 +1,7 @@
 package com.skvoznyak.findart
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import com.skvoznyak.findart.databinding.LayoutToolbarBinding
@@ -16,6 +17,14 @@ class LoadingActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         progressBar = loadingBinding.horizontalDottedProgress
         showProgressBar(true)
+
+        //----------------заглушка-----------------
+        loadingBinding.root.setOnClickListener {
+            val intent = Intent(this@LoadingActivity, PicturesListActivity::class.java)
+            intent.putExtra("headerFlag", true)
+            startActivity(intent)
+        }
+        //---------------------------------
     }
 
     override fun addActivity() {
@@ -23,20 +32,26 @@ class LoadingActivity : BaseActivity() {
         setContentView(loadingBinding.root)
     }
 
-    @SuppressLint("ResourceAsColor")
-    override fun addToolbar() { //TODO: передача стиля как параметра?
+    @SuppressLint("UseCompatLoadingForDrawables")
+    override fun addToolbar() {
         val toolbarBinding = LayoutToolbarBinding.inflate(layoutInflater)
-        addContentView(toolbarBinding.root, ViewGroup.LayoutParams(
-            ViewGroup
-                .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
-
+        addContentView(
+            toolbarBinding.root, ViewGroup.LayoutParams(
+                ViewGroup
+                    .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        )
         setSupportActionBar(toolbarBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbarBinding.toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_left_grey600_24dp)
+
+
+//        toolbarBinding.toolbar.menu.getItem(R.id.action_bookmarks).icon = getDrawable(R.drawable.arrow_left)
+
     }
 
-    fun showProgressBar(visibility: Boolean) {
+    private fun showProgressBar(visibility: Boolean) {
         progressBar.visibility = if (visibility) View.VISIBLE else View.INVISIBLE
     }
 }

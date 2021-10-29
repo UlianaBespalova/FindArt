@@ -16,14 +16,9 @@ class UploadImageActivity : GetImage() {
         super.onCreate(savedInstanceState)
         addContent()
 
-        uploadImageBinding.buttonChooseAnother.setOnClickListener {
-            selectImage()
-        }
-
         val requestCode = intent.extras?.get("requestCode") as Int?
         val data = intent.extras?.get("data") as Intent?
         val currentPhotoPath = intent.extras?.get("currentPhotoPath") as String?
-
         if (requestCode != null) {
             when (requestCode) {
                 ACTIVITY_RESULT_CODE_SELECT_FILE -> {
@@ -39,7 +34,16 @@ class UploadImageActivity : GetImage() {
                     }
                 }
             }
+        }
 
+        uploadImageBinding.buttonChooseAnother.setOnClickListener {
+            selectImage()
+        }
+
+        uploadImageBinding.buttonFind.setOnClickListener {
+            val intent = Intent(this@UploadImageActivity, LoadingActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            startActivity(intent)
         }
     }
 
@@ -66,7 +70,4 @@ class UploadImageActivity : GetImage() {
         }
         return bm
     }
-
-
-
 }

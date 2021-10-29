@@ -69,9 +69,9 @@ open class GetImage : BaseActivity() {
         when (requestCode) {
             PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (userChosenTask.equals(TAKE_PHOTO)) {
+                    if (userChosenTask == TAKE_PHOTO) {
                         cameraIntent()
-                    } else if (userChosenTask.equals(CHOOSE_FROM_GALLERY)) {
+                    } else if (userChosenTask == CHOOSE_FROM_GALLERY) {
                         galleryIntent()
                     }
                 }
@@ -145,7 +145,7 @@ open class GetImage : BaseActivity() {
                     val alertBuilder = AlertDialog.Builder(context)
                     alertBuilder.setCancelable(true)
                     alertBuilder.setTitle("Требуется разрешение")
-                    alertBuilder.setMessage("Для выполнения действия приложению необходим доступ к фото.")
+                    alertBuilder.setMessage("Для выполнения действия приложению необходим доступ к фото")
                     alertBuilder.setPositiveButton(android.R.string.yes) { _, _ ->
                         ActivityCompat.requestPermissions(context, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
                     }

@@ -26,6 +26,9 @@
 
         <activity android:name=".UploadImageActivity" android:launchMode="singleTop" />
         <activity android:name=".PicturesListActivity" android:launchMode="singleTop" />
+        <activity android:name=".LoadingActivity"
+            android:theme="@style/Theme.FindArt_dark"
+            android:launchMode="singleTop" />
 
 
         <provider
