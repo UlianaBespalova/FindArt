@@ -1,7 +1,7 @@
 package com.skvoznyak.findart
 
 import android.os.Bundle
-import android.util.Log
+
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager

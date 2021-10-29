@@ -14,7 +14,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -24,20 +23,20 @@ import java.io.IOException
 
 open class GetImage : BaseActivity() {
 
-    private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 10001
-    val ACTIVITY_RESULT_CODE_REQUEST_CAMERA = 10002
-    val ACTIVITY_RESULT_CODE_SELECT_FILE = 10003
-    private val TITLE_ADD_PHOTO = "Добавить фото"
-    private val TITLE_SELECT_FILE = "Выбрать файл"
-    private val TAKE_PHOTO = "Сделать фото"
-    private val CHOOSE_FROM_GALLERY = "Выбрать из Галереи"
-    private val CANCEL = "Отмена"
-    private val ACTIONS = arrayOf<CharSequence>(CHOOSE_FROM_GALLERY, TAKE_PHOTO, CANCEL)
+    private val permissionsRequestReadExtStorage = 101
+    protected val activityResCodeRequestCamera = 102
+    protected val activityResCodeSelectFile = 103
+    private val titleAddPhoto = "Добавить фото"
+    private val titleSelectFile = "Выбрать файл"
+    private val takePhoto = "Сделать фото"
+    private val chooseFromGallery = "Выбрать из Галереи"
+    private val cancel = "Отмена"
+    private val actions = arrayOf<CharSequence>(chooseFromGallery, takePhoto, cancel)
     private var userChosenTask = ""
 
     private val fileName = "photo"
-    lateinit var storageDirectory: File
-    lateinit var imageFile: File
+    private lateinit var storageDirectory: File
+    private lateinit var imageFile: File
     lateinit var currentPhotoPath: String
 
 
@@ -53,10 +52,10 @@ open class GetImage : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                ACTIVITY_RESULT_CODE_SELECT_FILE -> {
+                activityResCodeSelectFile -> {
                     onSelectFromGalleryResult(data)
                 }
-                ACTIVITY_RESULT_CODE_REQUEST_CAMERA -> {
+                activityResCodeRequestCamera -> {
                     onCaptureImageResult()
                 }
             }
@@ -67,11 +66,11 @@ open class GetImage : BaseActivity() {
                                             grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE -> {
+            permissionsRequestReadExtStorage -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (userChosenTask == TAKE_PHOTO) {
+                    if (userChosenTask == takePhoto) {
                         cameraIntent()
-                    } else if (userChosenTask == CHOOSE_FROM_GALLERY) {
+                    } else if (userChosenTask == chooseFromGallery) {
                         galleryIntent()
                     }
                 }
@@ -96,30 +95,29 @@ open class GetImage : BaseActivity() {
         return bm
     }
 
-    open fun onCaptureImageResult() : Bitmap {
-        val bm: Bitmap = BitmapFactory.decodeFile(currentPhotoPath)
-        return bm
+    open fun onCaptureImageResult(): Bitmap {
+        return BitmapFactory.decodeFile(currentPhotoPath)
     }
 
     fun selectImage() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(TITLE_ADD_PHOTO)
-        builder.setItems(ACTIONS, DialogInterface.OnClickListener { dialog, item ->
+        builder.setTitle(titleAddPhoto)
+        builder.setItems(actions) { dialog, item ->
             val result = checkPermission(this)
-            if (ACTIONS[item] == TAKE_PHOTO) {
-                userChosenTask = TAKE_PHOTO
+            if (actions[item] == takePhoto) {
+                userChosenTask = takePhoto
                 if (result) {
                     cameraIntent()
                 }
-            } else if (ACTIONS[item] == CHOOSE_FROM_GALLERY) {
-                userChosenTask = CHOOSE_FROM_GALLERY
+            } else if (actions[item] == chooseFromGallery) {
+                userChosenTask = chooseFromGallery
                 if (result) {
                     galleryIntent()
                 }
-            } else if (ACTIONS[item] == CANCEL) {
+            } else if (actions[item] == cancel) {
                 dialog.dismiss()
             }
-        })
+        }
         builder.show()
     }
 
@@ -127,19 +125,19 @@ open class GetImage : BaseActivity() {
         val imageUri = FileProvider.getUriForFile(this@GetImage, "com.skvoznyak.findart.fileprovider", imageFile)
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-        startActivityForResult(intent, ACTIVITY_RESULT_CODE_REQUEST_CAMERA)
+        startActivityForResult(intent, activityResCodeRequestCamera)
     }
 
     private fun galleryIntent() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, TITLE_SELECT_FILE), ACTIVITY_RESULT_CODE_SELECT_FILE)
+        startActivityForResult(Intent.createChooser(intent, titleSelectFile), activityResCodeSelectFile)
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun checkPermission(context: Context): Boolean {
-        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     val alertBuilder = AlertDialog.Builder(context)
@@ -147,12 +145,12 @@ open class GetImage : BaseActivity() {
                     alertBuilder.setTitle("Требуется разрешение")
                     alertBuilder.setMessage("Для выполнения действия приложению необходим доступ к фото")
                     alertBuilder.setPositiveButton(android.R.string.yes) { _, _ ->
-                        ActivityCompat.requestPermissions(context, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
+                        ActivityCompat.requestPermissions(context, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), permissionsRequestReadExtStorage)
                     }
                     val alert = alertBuilder.create()
                     alert.show()
                 } else {
-                    ActivityCompat.requestPermissions(context, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
+                    ActivityCompat.requestPermissions(context, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), permissionsRequestReadExtStorage)
                 }
                 return false
             } else {

@@ -4,13 +4,19 @@ import android.os.Bundle
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.ViewGroup
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeler
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.skvoznyak.findart.databinding.UploadScreenBinding
 
 
 class UploadImageActivity : GetImage() {
 
     private lateinit var uploadImageBinding: UploadScreenBinding
+    private var bm : Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,19 +27,18 @@ class UploadImageActivity : GetImage() {
         val currentPhotoPath = intent.extras?.get("currentPhotoPath") as String?
         if (requestCode != null) {
             when (requestCode) {
-                ACTIVITY_RESULT_CODE_SELECT_FILE -> {
+                activityResCodeSelectFile -> {
                     if (data != null) {
-                        val bm = onSelectFromGalleryResult(data)
-                        uploadImageBinding.uploadedImage.setImageBitmap(bm)
+                        bm = onSelectFromGalleryResult(data)
                     }
                 }
-                ACTIVITY_RESULT_CODE_REQUEST_CAMERA -> {
+                activityResCodeRequestCamera -> {
                     if (currentPhotoPath != null) {
-                        val bm: Bitmap = BitmapFactory.decodeFile(currentPhotoPath)
-                        uploadImageBinding.uploadedImage.setImageBitmap(bm)
+                        bm = BitmapFactory.decodeFile(currentPhotoPath)
                     }
                 }
             }
+            if (bm != null) uploadImageBinding.uploadedImage.setImageBitmap(bm)
         }
 
         uploadImageBinding.buttonChooseAnother.setOnClickListener {
@@ -41,9 +46,14 @@ class UploadImageActivity : GetImage() {
         }
 
         uploadImageBinding.buttonFind.setOnClickListener {
-            val intent = Intent(this@UploadImageActivity, LoadingActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-            startActivity(intent)
+            if (bm != null) {
+                firebaseMagic()
+//                val intent = Intent(this@UploadImageActivity, LoadingActivity::class.java)
+//                Log.d("ivan", bm.toString())
+////                intent.putExtra("imageBm", bm)
+//                intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+//                startActivity(intent)
+            }
         }
     }
 
@@ -58,16 +68,38 @@ class UploadImageActivity : GetImage() {
     }
 
     override fun onCaptureImageResult() : Bitmap {
-        val bm = super.onCaptureImageResult()
+        bm = super.onCaptureImageResult()
         uploadImageBinding.uploadedImage.setImageBitmap(bm)
-        return bm
+        return bm as Bitmap
     }
 
     override fun onSelectFromGalleryResult(data: Intent?) : Bitmap? {
-        val bm = super.onSelectFromGalleryResult(data)
+        bm = super.onSelectFromGalleryResult(data)
         if (bm != null) {
             uploadImageBinding.uploadedImage.setImageBitmap(bm)
         }
         return bm
     }
+
+
+    private fun firebaseMagic() {
+
+        Log.d("ivan", "---------------Start------------ $bm")
+
+        val image = InputImage.fromBitmap(bm!!, 0)
+        val options = ImageLabelerOptions.Builder()
+            .setConfidenceThreshold(0.7f)
+            .build()
+        val labeler = ImageLabeling.getClient(options)
+
+        labeler.process(image).addOnSuccessListener { labels ->
+            Log.d("ivan", "-------> ${labels.size}")
+            for (label in labels) {
+                Log.d("ivan", "-> $label")
+            }
+        }.addOnFailureListener { e -> Log.d("ivan", "errrrrrrror I FOUND IT $e") }
+
+
+    }
+
 }
