@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.ViewGroup
 import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.label.ImageLabeler
+import com.google.mlkit.vision.label.ImageLabel
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.skvoznyak.findart.databinding.UploadScreenBinding
@@ -47,12 +47,11 @@ class UploadImageActivity : GetImage() {
 
         uploadImageBinding.buttonFind.setOnClickListener {
             if (bm != null) {
-                firebaseMagic()
-//                val intent = Intent(this@UploadImageActivity, LoadingActivity::class.java)
-//                Log.d("ivan", bm.toString())
-////                intent.putExtra("imageBm", bm)
-//                intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-//                startActivity(intent)
+                getLabelsWithFirebase()
+
+                val intent = Intent(this@UploadImageActivity, LoadingActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+                startActivity(intent)
             }
         }
     }
@@ -82,24 +81,32 @@ class UploadImageActivity : GetImage() {
     }
 
 
-    private fun firebaseMagic() {
-
-        Log.d("ivan", "---------------Start------------ $bm")
-
+    private fun getLabelsWithFirebase() {
         val image = InputImage.fromBitmap(bm!!, 0)
         val options = ImageLabelerOptions.Builder()
-            .setConfidenceThreshold(0.7f)
+            .setConfidenceThreshold(0.5f)
             .build()
         val labeler = ImageLabeling.getClient(options)
 
         labeler.process(image).addOnSuccessListener { labels ->
-            Log.d("ivan", "-------> ${labels.size}")
-            for (label in labels) {
-                Log.d("ivan", "-> $label")
-            }
-        }.addOnFailureListener { e -> Log.d("ivan", "errrrrrrror I FOUND IT $e") }
 
+            val intent = Intent(this@UploadImageActivity, PicturesListActivity::class.java)
+            intent.putExtra("headerFlag", true)
+            intent.putExtra("dataLabels", parseLabels(labels).toTypedArray())
+            startActivity(intent)
 
+        }.addOnFailureListener { e ->
+            Log.d("ivan", "error $e")
+        }
     }
+
+    private fun parseLabels(labels : MutableList<ImageLabel>) : List<String> {
+        val list = mutableListOf<String>()
+        for (label in labels) {
+            list.add(label.text)
+        }
+        return list
+    }
+
 
 }

@@ -100,7 +100,7 @@
         android:id="@+id/button_bookmarks"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="?attr/actionBarSize"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:clickable="true"
         android:contentDescription="@string/bookmarks"
         app:srcCompat="@drawable/ic_bookmark_outline_black_24dp"

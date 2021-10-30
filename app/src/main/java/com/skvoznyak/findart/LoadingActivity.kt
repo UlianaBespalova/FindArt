@@ -26,19 +26,14 @@ class LoadingActivity : BaseActivity() {
         progressBar = loadingBinding.horizontalDottedProgress
         showProgressBar(true)
 
-        Log.d("ivan", "create loading")
-//        val imageBm = intent.extras?.get("imageBm") as Bitmap
-//        Log.d("ivan", "get bitmap $imageBm")
-//        firebaseMagic(imageBm)
 
-
-        //----------------заглушка для выхода-----------------
-        loadingBinding.root.setOnClickListener {
-            val intent = Intent(this@LoadingActivity, PicturesListActivity::class.java)
-            intent.putExtra("headerFlag", true)
-            startActivity(intent)
-        }
-        //---------------------------------
+//        //----------------заглушка для выхода-----------------
+//        loadingBinding.root.setOnClickListener {
+//            val intent = Intent(this@LoadingActivity, PicturesListActivity::class.java)
+//            intent.putExtra("headerFlag", true)
+//            startActivity(intent)
+//        }
+//        //---------------------------------
     }
 
     override fun addActivity() {
@@ -64,32 +59,4 @@ class LoadingActivity : BaseActivity() {
     private fun showProgressBar(visibility: Boolean) {
         progressBar.visibility = if (visibility) View.VISIBLE else View.INVISIBLE
     }
-
-
-
-//    private fun firebaseMagic(imageBm : Bitmap) {
-//
-//        Log.d("ivan", "Start")
-//        val options = FirebaseVisionLabelDetectorOptions.Builder()
-//            .setConfidenceThreshold(0.7f)
-//            .build()
-//
-//        val image = FirebaseVisionImage.fromBitmap(imageBm)
-//        val detector = FirebaseVision.getInstance().getVisionLabelDetector(options)
-//
-//        detector.detectInImage(image).addOnSuccessListener(OnSuccessListener<List<FirebaseVisionLabel>>() {
-//            fun onSuccess(labels : List<FirebaseVisionLabel>) {
-//                Log.d("ivan", "Success!!! $labels")
-//                //Do something if a label is detected//
-//            }
-//        }).addOnFailureListener(OnFailureListener() {
-//
-//            fun onFailure(e: Exception) {
-//                Log.d("ivan", "errrror $e")
-//                //Task failed with an exception//
-//            }
-//        })
-//    }
-
-
 }

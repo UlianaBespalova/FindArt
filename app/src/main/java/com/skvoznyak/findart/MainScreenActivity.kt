@@ -22,9 +22,9 @@ class MainScreenActivity : GetImage() {
             startActivity(intent)
         }
         mainScreenBinding.buttonChooseImage.setOnClickListener {
-//            selectImage()
-            val intent = Intent(this@MainScreenActivity, UploadImageActivity::class.java)
-            startActivity(intent)
+            selectImage()
+//            val intent = Intent(this@MainScreenActivity, UploadImageActivity::class.java)
+//            startActivity(intent)
         }
     }
 
