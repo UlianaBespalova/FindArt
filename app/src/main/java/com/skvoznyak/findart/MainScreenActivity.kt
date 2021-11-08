@@ -5,9 +5,8 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import com.skvoznyak.findart.databinding.ActivityMainBinding
-import com.skvoznyak.findart.databinding.LoadingScreenBinding
 import com.skvoznyak.findart.databinding.MainScreenBinding
+import com.skvoznyak.findart.utils.GetImage
 
 
 class MainScreenActivity : GetImage() {
