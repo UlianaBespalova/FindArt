@@ -7,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.skvoznyak.findart.databinding.ListHeaderBinding
-import com.skvoznyak.findart.model.SimilarPicture
-
+import com.skvoznyak.findart.model.Picture
 import com.squareup.picasso.Picasso
 
 
-class PictureAdapter(val context: Context, private val pictures: List<SimilarPicture>, val callback: (() -> Unit)?):
+class PictureAdapter(val context: Context, private val pictures: List<Picture>,
+                     private val callback: (() -> Unit)?):
     Adapter<PictureAdapter.PictureViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureViewHolder {
@@ -27,7 +25,6 @@ class PictureAdapter(val context: Context, private val pictures: List<SimilarPic
     override fun onBindViewHolder(holder: PictureViewHolder, position: Int) {
 
 // TODO: Решить вопрос с лоадером
-//        if (position == pictures.size - 1)
         if (position == 0)
             holder.bind(pictures[position], context, callback)
         else holder.bind(pictures[position], context, null)
@@ -42,7 +39,7 @@ class PictureAdapter(val context: Context, private val pictures: List<SimilarPic
         private val title:TextView = itemView.findViewById(R.id.item_picture_title)
         private val painter:TextView = itemView.findViewById(R.id.item_picture_painter)
 
-        fun bind(picture: SimilarPicture, context: Context, callback: (() -> Unit)?) {
+        fun bind(picture: Picture, context: Context, callback: (() -> Unit)?) {
             image.setImageURI(Uri.parse(picture.image))
             title.text = picture.title
             painter.text = picture.painter

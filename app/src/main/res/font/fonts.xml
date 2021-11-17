@@ -8,24 +8,19 @@
         android:font="@font/avenir_light"
         app:fontStyle="normal"
         app:fontWeight="100"
-        app:font="@font/avenir_light"
-        />
-
+        app:font="@font/avenir_light" />
     <font
         android:fontStyle="normal"
         android:fontWeight="100"
         android:font="@font/gill_sans"
         app:fontStyle="normal"
         app:fontWeight="100"
-        app:font="@font/gill_sans"
-        />
-
+        app:font="@font/gill_sans" />
     <font
         android:fontStyle="normal"
         android:fontWeight="100"
         android:font="@font/baskerville"
         app:fontStyle="normal"
         app:fontWeight="100"
-        app:font="@font/baskerville"
-        />
+        app:font="@font/baskerville" />
 </font-family>

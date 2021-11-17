@@ -16,10 +16,8 @@ import com.skvoznyak.findart.utils.noConnection
 class UploadImageActivity : GetImage() {
 
     private lateinit var uploadImageBinding: UploadScreenBinding
-
     private var bm : Bitmap? = null
     private val tfliteModel = TfliteModel()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +36,9 @@ class UploadImageActivity : GetImage() {
         }
 
         uploadImageBinding.buttonFind.setOnClickListener {
-
             if (isOnline(this)) {
                 if (bm != null) {
-                    val vector = tfliteModel.doMagic(bm!!, this)
+                    val vector = tfliteModel.imageToVector(bm!!, this)
                     val intent =
                         Intent(this@UploadImageActivity, SimilarPicturesListActivity::class.java)
                     intent.putExtra("headerFlag", true)
@@ -55,10 +52,6 @@ class UploadImageActivity : GetImage() {
         }
     }
 
-
-
-
-
     private fun addContent() {
         uploadImageBinding = UploadScreenBinding.inflate(layoutInflater)
         addContentView(
@@ -68,7 +61,6 @@ class UploadImageActivity : GetImage() {
             )
         )
     }
-
 
     private fun processImage(requestCode : Int, currentPhotoPath : String?, data : Intent?) {
         when (requestCode) {

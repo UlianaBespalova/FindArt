@@ -22,8 +22,6 @@ class MainScreenActivity : GetImage() {
         }
         mainScreenBinding.buttonChooseImage.setOnClickListener {
             selectImage()
-//            val intent = Intent(this@MainScreenActivity, UploadImageActivity::class.java)
-//            startActivity(intent)
         }
     }
 
@@ -44,7 +42,6 @@ class MainScreenActivity : GetImage() {
             startActivity(intent)
         }
     }
-
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)

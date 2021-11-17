@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.skvoznyak.findart.databinding.ListScreenBinding
-import com.skvoznyak.findart.model.SimilarPicture
+import com.skvoznyak.findart.model.Picture
 
 
 open class PicturesListActivity :BaseActivity() {
 
-    protected lateinit var listScreenBinding: ListScreenBinding
+    private lateinit var listScreenBinding: ListScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +19,6 @@ open class PicturesListActivity :BaseActivity() {
 
         createResultList()
     }
-
 
     open fun createResultList(){
         val resultList:RecyclerView = findViewById(R.id.resultList)
@@ -31,8 +30,7 @@ open class PicturesListActivity :BaseActivity() {
         resultList.layoutManager = LinearLayoutManager(this)
     }
 
-
-    private fun addContent() { //TODO: превратить в фрагмент
+    private fun addContent() {
         listScreenBinding = ListScreenBinding.inflate(layoutInflater)
         addContentView(
             listScreenBinding.root, ViewGroup.LayoutParams(
@@ -42,8 +40,7 @@ open class PicturesListActivity :BaseActivity() {
         )
     }
 
-    protected fun resultsMock():List<SimilarPicture> {
-
+    private fun resultsMock():List<Picture> {
         val uri1 = "${ContentResolver.SCHEME_ANDROID_RESOURCE}:/" +
                 "/${resources.getResourcePackageName(R.drawable.picture_mock)}/" +
                 "/${resources.getResourceTypeName(R.drawable.picture_mock)}/" +
@@ -56,11 +53,10 @@ open class PicturesListActivity :BaseActivity() {
                 "/${resources.getResourcePackageName(R.drawable.picture_mock2)}/" +
                 "/${resources.getResourceTypeName(R.drawable.picture_mock2)}/" +
                 "/${resources.getResourceEntryName(R.drawable.picture_mock2)}"
-
         return listOf(
-            SimilarPicture(0, "Пикник", "Томас Коул", uri1),
-            SimilarPicture(0, "Пруд с кувшинками", "Клод Моне", uri2),
-            SimilarPicture(0, "Женщина с зонтиком", "Клод Моне", uri3),
+            Picture(0, "Пикник", "Томас Коул", uri1),
+            Picture(0, "Пруд с кувшинками", "Клод Моне", uri2),
+            Picture(0, "Женщина с зонтиком", "Клод Моне", uri3),
         )
     }
 }

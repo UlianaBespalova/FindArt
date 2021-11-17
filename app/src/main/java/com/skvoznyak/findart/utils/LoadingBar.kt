@@ -17,8 +17,7 @@ class LoadingBar : View {
     private val bounceDotRadius = 15
     private val dotAmount = 6
     private var dotPosition = 0
-    private var duration = 900L
-
+    private var duration = 700L
     private val dotsDistributionX: Float = 90F
 
     constructor(context: Context?) : super(context)
@@ -28,7 +27,6 @@ class LoadingBar : View {
         attrs,
         defStyleAttr
     )
-
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

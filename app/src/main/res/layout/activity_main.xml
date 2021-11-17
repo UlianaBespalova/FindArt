@@ -10,22 +10,15 @@
     android:background="@drawable/background"
     tools:context=".BaseActivity">
 
-<!--    <androidx.constraintlayout.widget.Guideline-->
-<!--        android:id="@+id/main_screen_guideline_top"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintGuide_begin="100dp" />-->
-
     <ImageView
         android:id="@+id/not_found_picture"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="100dp"
-        app:layout_constraintHeight_percent="0.3"
         android:src="@drawable/not_found"
+        android:contentDescription="@string/app_name"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,34 +1,19 @@
 package com.skvoznyak.findart.utils
 
 import android.content.Context
-import android.content.res.AssetManager
 import android.graphics.Bitmap
 import android.os.Build
 import android.util.Log
 import com.skvoznyak.findart.ml.ModelMeta
 import org.tensorflow.lite.DataType
-import org.tensorflow.lite.Interpreter
-import org.tensorflow.lite.support.common.TensorProcessor
-import org.tensorflow.lite.support.common.ops.NormalizeOp
-import org.tensorflow.lite.support.image.ImageProcessor
-import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.image.ops.ResizeOp
-import org.tensorflow.lite.support.image.ops.ResizeWithCropOrPadOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import java.io.FileInputStream
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import java.nio.channels.FileChannel
-import kotlin.math.min
+
 
 class TfliteModel {
 
-    private lateinit var tflite: Interpreter
-    private lateinit var tflitemodel: ByteBuffer
-
-    private val modelPath = "model.tflite"
-
-    fun doMagic(bm_s: Bitmap, context: Context) : FloatArray {
+    fun imageToVector(bm_s: Bitmap, context: Context) : FloatArray {
 
         var res = emptyArray<Float>().toFloatArray()
         val bm = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -44,7 +29,6 @@ class TfliteModel {
             val bm_sized_8888 = Bitmap.createScaledBitmap(bm_8888, 224, 224, true)
 
             val byteBuffer = convertBitmapToByteBuffer(bm_sized_8888)
-
             val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
             inputFeature0.loadBuffer(byteBuffer)
 
@@ -75,7 +59,7 @@ class TfliteModel {
 
         imgData.rewind()
         bm.getPixels(intValues, 0, bm.width, 0, 0, bm.width, bm.height)
-        // Convert the image to floating point.
+
         var pixel = 0
         for (i in 0 until INPUT_SIZE) {
             for (j in 0 until INPUT_SIZE) {
@@ -90,7 +74,7 @@ class TfliteModel {
 
 
     fun PRINT_RESUTL(res: FloatArray) {
-        for (step in (0..0)) {
+        for (step in (0..3)) {
             Log.d("ivan", "---------------$step--------------")
 
             val vector = mutableListOf<Float>()

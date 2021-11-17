@@ -5,17 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingVertical="10dp"
-    >
+    android:paddingVertical="10dp">
 
     <View
         android:id="@+id/header_view"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"
-        style="@style/Divider"
-        />
+        style="@style/Divider" />
 
     <TextView
         android:id="@+id/header_text"
@@ -27,15 +25,10 @@
         android:textColor="@color/transparent_gray"
         android:background="@color/beige_normal"
         android:paddingHorizontal="3dp"
-
         app:layout_constraintBottom_toBottomOf="@+id/header_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/header_view"
         tools:text="Not found"
         />
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

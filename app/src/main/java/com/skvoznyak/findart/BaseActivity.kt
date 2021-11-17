@@ -2,7 +2,6 @@ package com.skvoznyak.findart
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.skvoznyak.findart.databinding.ActivityMainBinding
@@ -18,7 +17,6 @@ open class BaseActivity : AppCompatActivity() {
         addActivity()
         addToolbar()
     }
-
 
     protected open fun addActivity() {
         val mainBinding = ActivityMainBinding.inflate(layoutInflater)

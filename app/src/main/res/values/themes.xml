@@ -1,5 +1,4 @@
 <resources
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
@@ -9,8 +8,8 @@
         <item name="colorPrimaryVariant">@color/beige_additional</item>
         <item name="colorOnPrimary">@color/dark_gray</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">@color/brown</item>
+        <item name="colorSecondaryVariant">@color/brown</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
@@ -19,11 +18,7 @@
         <item name="android:actionMenuTextColor">@color/dark_gray</item>
         <item name="android:toolbarStyle">@color/dark_gray</item>
         <item name="android:actionMenuTextAppearance">@style/Toolbar.MenuText</item>
-
     </style>
-
-
-<!--    &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
 
     <style name="Theme.FindArt_dark" parent="Theme.FindArt">
         <item name="colorPrimaryVariant">@color/black</item>
@@ -35,16 +30,11 @@
         <item name="colorControlNormal">@color/beige_normal</item>
     </style>
 
-<!--    &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; -->
-
-
     <style name="ActionBar_transparent" parent="Theme.FindArt">
         <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">shortEdges</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
-
-
 
     <style name="Toolbar.MenuText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">18sp</item>
@@ -55,7 +45,6 @@
         <item name="android:layout_height">2dp</item>
         <item name="android:background">@color/transparent_gray</item>
     </style>
-
 
     <style name="Theme.FindArt.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar"/>
     <style name="Theme.FindArt.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

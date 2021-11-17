@@ -33,7 +33,6 @@ open class GetImage : BaseActivity() {
     private val cancel = "Отмена"
     private val actions = arrayOf<CharSequence>(chooseFromGallery, takePhoto, cancel)
     private var userChosenTask = ""
-
     private val fileName = "photo"
     private lateinit var storageDirectory: File
     private lateinit var imageFile: File
@@ -160,6 +159,4 @@ open class GetImage : BaseActivity() {
             return true
         }
     }
-
-
 }

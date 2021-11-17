@@ -1,9 +1,8 @@
 package com.skvoznyak.findart.model
 
-import android.net.Uri
 import com.google.gson.annotations.SerializedName
 
-data class SimilarPicture(
+data class Picture(
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")

@@ -30,18 +30,15 @@
         android:id="@+id/resultList"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintTop_toTopOf="@id/guideline_topHorizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="5dp"
-        />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/listScreenContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
     </androidx.fragment.app.FragmentContainerView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

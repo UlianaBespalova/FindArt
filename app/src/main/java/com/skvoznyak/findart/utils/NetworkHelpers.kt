@@ -2,10 +2,10 @@ package com.skvoznyak.findart.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
 import com.skvoznyak.findart.R
+
 
 fun isOnline(context: Context) : Boolean {
     val cm : ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -26,5 +26,4 @@ fun noConnection(context: Context, darkFlag: Boolean = false) {
         view?.setBackgroundResource(R.color.transparent_dark)
     }
     toast.show()
-    Log.d("ivan", "No connection")
 }

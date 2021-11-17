@@ -10,5 +10,5 @@ interface KnnApi {
     fun knnGetSimilarPictures (
         @Body jsonObject: JSONObject
     ):
-    Call<List<SimilarPicture>>
+    Call<List<Picture>>
 }
