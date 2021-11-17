@@ -7,21 +7,20 @@
 
     <application
 
-        android:usesCleartextTraffic="true"
-
-
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FindArt">
+        android:theme="@style/Theme.FindArt"
+        >
         <activity
             android:name=".MainScreenActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/ActionBar_transparent"
+            android:screenOrientation="portrait"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,11 +28,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".UploadImageActivity" android:launchMode="singleTop" />
-        <activity android:name=".PicturesListActivity" android:launchMode="standard" />
-        <activity android:name=".LoadingActivity"
-            android:theme="@style/Theme.FindArt_dark"
-            android:launchMode="singleTop" />
+        <activity android:name=".UploadImageActivity" android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PicturesListActivity" android:launchMode="singleTop" />
+        <activity android:name=".SimilarPicturesListActivity" android:launchMode="singleTop" />
 
 
         <provider

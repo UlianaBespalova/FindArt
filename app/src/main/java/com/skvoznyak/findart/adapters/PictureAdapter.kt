@@ -1,16 +1,23 @@
 package com.skvoznyak.findart
 
+import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.skvoznyak.findart.adapters.Picture
+import com.skvoznyak.findart.databinding.ListHeaderBinding
+import com.skvoznyak.findart.model.SimilarPicture
+
+import com.squareup.picasso.Picasso
 
 
-class PictureAdapter(private val pictures: List<Picture>): Adapter<PictureAdapter.PictureViewHolder>() {
+class PictureAdapter(val context: Context, private val pictures: List<SimilarPicture>, val callback: (() -> Unit)?):
+    Adapter<PictureAdapter.PictureViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.picture_item, parent, false)
@@ -18,7 +25,12 @@ class PictureAdapter(private val pictures: List<Picture>): Adapter<PictureAdapte
     }
 
     override fun onBindViewHolder(holder: PictureViewHolder, position: Int) {
-        holder.bind(pictures[position])
+
+// TODO: Решить вопрос с лоадером
+//        if (position == pictures.size - 1)
+        if (position == 0)
+            holder.bind(pictures[position], context, callback)
+        else holder.bind(pictures[position], context, null)
     }
 
     override fun getItemCount(): Int = pictures.size
@@ -30,16 +42,27 @@ class PictureAdapter(private val pictures: List<Picture>): Adapter<PictureAdapte
         private val title:TextView = itemView.findViewById(R.id.item_picture_title)
         private val painter:TextView = itemView.findViewById(R.id.item_picture_painter)
 
-        fun bind(picture: Picture) {
-            image.setImageResource(picture.image)
+        fun bind(picture: SimilarPicture, context: Context, callback: (() -> Unit)?) {
+            image.setImageURI(Uri.parse(picture.image))
             title.text = picture.title
             painter.text = picture.painter
+
+            Picasso.with(context).load(picture.image)
+                .into(image, object : com.squareup.picasso.Callback {
+                    override fun onSuccess() {
+                        if (callback != null) callback()
+                    }
+                    override fun onError() {
+                        if (callback != null) callback()
+                    }
+                })
         }
     }
 }
 
 
-class HeaderAdapter: RecyclerView.Adapter<HeaderAdapter.HeaderViewHolder>(){
+class HeaderAdapter(private val text: String):
+    RecyclerView.Adapter<HeaderAdapter.HeaderViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeaderViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -48,7 +71,7 @@ class HeaderAdapter: RecyclerView.Adapter<HeaderAdapter.HeaderViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: HeaderViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(text)
     }
 
     override fun getItemCount(): Int {
@@ -56,7 +79,10 @@ class HeaderAdapter: RecyclerView.Adapter<HeaderAdapter.HeaderViewHolder>(){
     }
 
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        fun bind() {
+
+        val textView = view.findViewById<TextView>(R.id.header_text)
+        fun bind(text: String) {
+            textView.text = text
         }
     }
 }

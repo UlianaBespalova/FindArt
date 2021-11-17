@@ -37,9 +37,7 @@ open class BaseActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
@@ -59,5 +57,10 @@ open class BaseActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    protected fun showNotFound() {
+        val imageView = findViewById<View>(R.id.not_found_picture)
+        imageView?.visibility = View.VISIBLE
     }
 }

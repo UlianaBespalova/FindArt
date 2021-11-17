@@ -23,6 +23,8 @@
     <string name="choose_another">Выбрать другое</string>
     <string name="edit">Редактировать</string>
     <string name="find">Найти!</string>
+
     <string name="best_results">Лучшее совпадение</string>
+    <string name="no_results">Совпадения не найдены</string>
 
 </resources>

@@ -13,6 +13,7 @@
     <color name="beige_additional">#FFFAD59E</color>
     <color name="beige_normal">#FFF3E4CD</color>
     <color name="dark_gray">#FF2C2A2B</color>
+    <color name="toolbar_gray">#FF49494A</color>
     <color name="transparent_gray">#B32C2A2B</color>
 
     <color name="transparent_white">#CDF1EAEA</color>

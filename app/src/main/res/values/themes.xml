@@ -28,7 +28,7 @@
     <style name="Theme.FindArt_dark" parent="Theme.FindArt">
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
-        <item name="colorPrimary">#49494A</item>
+        <item name="colorPrimary">@color/toolbar_gray</item>
     </style>
 
     <style name="Theme.FindArt_dark.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar">

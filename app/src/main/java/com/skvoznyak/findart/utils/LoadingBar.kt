@@ -17,7 +17,7 @@ class LoadingBar : View {
     private val bounceDotRadius = 15
     private val dotAmount = 6
     private var dotPosition = 0
-    private var duration = 500L //900L
+    private var duration = 900L
 
     private val dotsDistributionX: Float = 90F
 

@@ -1,46 +1,33 @@
 package com.skvoznyak.findart
 
-import android.content.Intent
+import android.content.ContentResolver
 import android.os.Bundle
-import android.util.Log
-
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.skvoznyak.findart.adapters.Picture
 import com.skvoznyak.findart.databinding.ListScreenBinding
+import com.skvoznyak.findart.model.SimilarPicture
 
 
-class PicturesListActivity :BaseActivity() {
+open class PicturesListActivity :BaseActivity() {
 
-    private lateinit var listScreenBinding: ListScreenBinding
+    protected lateinit var listScreenBinding: ListScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addContent()
 
+        createResultList()
+    }
+
+
+    open fun createResultList(){
         val resultList:RecyclerView = findViewById(R.id.resultList)
         resultList.isNestedScrollingEnabled = true
 
-        if (intent.extras?.get("headerFlag") as? Boolean == true) {
+        val pictureAdapter = PictureAdapter(this, resultsMock(), null)
+        resultList.adapter = pictureAdapter
 
-            //---------------------------------------------------------------------
-            //В итоге формат входных данных будет одинаковым
-            val labels = intent.extras?.get("dataLabels") as Array<String>
-            val mockList = mutableListOf<Picture>()
-            for (label in labels) {
-                mockList.add(createResultsMock(label))
-            }
-            //---------------------------------------------------------------------
-            val headerAdapter = HeaderAdapter()
-            val pictureAdapter = PictureAdapter(mockList)
-            resultList.adapter = ConcatAdapter(headerAdapter, pictureAdapter)
-
-        } else {
-            val pictureAdapter = PictureAdapter(resultsMock())
-            resultList.adapter = pictureAdapter
-        }
         resultList.layoutManager = LinearLayoutManager(this)
     }
 
@@ -55,15 +42,25 @@ class PicturesListActivity :BaseActivity() {
         )
     }
 
-    private fun resultsMock():List<Picture> {
-        return listOf(
-            Picture("Пикник", "Томас Коул", R.drawable.picture_mock),
-            Picture("Пруд с кувшинками", "Клод Моне", R.drawable.picture_mock1),
-            Picture("Женщина с зонтиком", "Клод Моне", R.drawable.picture_mock2),
-        )
-    }
+    protected fun resultsMock():List<SimilarPicture> {
 
-    private fun createResultsMock(title: String) : Picture {
-        return Picture(title, "----", R.drawable.picture_mock1)
+        val uri1 = "${ContentResolver.SCHEME_ANDROID_RESOURCE}:/" +
+                "/${resources.getResourcePackageName(R.drawable.picture_mock)}/" +
+                "/${resources.getResourceTypeName(R.drawable.picture_mock)}/" +
+                "/${resources.getResourceEntryName(R.drawable.picture_mock)}"
+        val uri2 = "${ContentResolver.SCHEME_ANDROID_RESOURCE}:/" +
+                "/${resources.getResourcePackageName(R.drawable.picture_mock1)}/" +
+                "/${resources.getResourceTypeName(R.drawable.picture_mock1)}/" +
+                "/${resources.getResourceEntryName(R.drawable.picture_mock1)}"
+        val uri3 = "${ContentResolver.SCHEME_ANDROID_RESOURCE}:/" +
+                "/${resources.getResourcePackageName(R.drawable.picture_mock2)}/" +
+                "/${resources.getResourceTypeName(R.drawable.picture_mock2)}/" +
+                "/${resources.getResourceEntryName(R.drawable.picture_mock2)}"
+
+        return listOf(
+            SimilarPicture(0, "Пикник", "Томас Коул", uri1),
+            SimilarPicture(0, "Пруд с кувшинками", "Клод Моне", uri2),
+            SimilarPicture(0, "Женщина с зонтиком", "Клод Моне", uri3),
+        )
     }
 }
