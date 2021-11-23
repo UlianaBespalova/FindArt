@@ -24,7 +24,7 @@ open class PicturesListActivity :BaseActivity() {
         val resultList:RecyclerView = findViewById(R.id.resultList)
         resultList.isNestedScrollingEnabled = true
 
-        val pictureAdapter = PictureAdapter(this, resultsMock(), null)
+        val pictureAdapter = PictureAdapter(this, resultsMock(), null, null)
         resultList.adapter = pictureAdapter
 
         resultList.layoutManager = LinearLayoutManager(this)
@@ -54,9 +54,9 @@ open class PicturesListActivity :BaseActivity() {
                 "/${resources.getResourceTypeName(R.drawable.picture_mock2)}/" +
                 "/${resources.getResourceEntryName(R.drawable.picture_mock2)}"
         return listOf(
-            Picture(0, "Пикник", "Томас Коул", uri1),
-            Picture(0, "Пруд с кувшинками", "Клод Моне", uri2),
-            Picture(0, "Женщина с зонтиком", "Клод Моне", uri3),
+            Picture(0, "Пикник", "Томас Коул", "1000", uri1, "kek"),
+            Picture(0, "Пруд с кувшинками", "Клод Моне", "2000", uri2, "kek"),
+            Picture(0, "Женщина с зонтиком", "Клод Моне", "3000", uri3, "kek"),
         )
     }
 }

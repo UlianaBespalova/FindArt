@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,10 +28,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UploadImageActivity" android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-        <activity android:name=".PicturesListActivity" android:launchMode="singleTop" />
-        <activity android:name=".SimilarPicturesListActivity" android:launchMode="singleTop" />
+
+        <activity
+            android:name=".UploadImageActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".PicturesListActivity"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".SimilarPicturesListActivity"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".PictureActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.FindArt_animation"
+            />
+        <activity
+            android:name=".FullScreenActivity"
+            android:theme="@style/Theme.FindArt_animation"
+            />
 
         <provider
             android:authorities="com.skvoznyak.findart.fileprovider"

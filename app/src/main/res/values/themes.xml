@@ -46,6 +46,14 @@
         <item name="android:background">@color/transparent_gray</item>
     </style>
 
+    <style name="Theme.FindArt_animation" parent="Theme.FindArt">
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/open_image</item>
+        <item name="android:windowSharedElementExitTransition">@transition/open_image</item>
+    </style>
+
+
+
     <style name="Theme.FindArt.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar"/>
     <style name="Theme.FindArt.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

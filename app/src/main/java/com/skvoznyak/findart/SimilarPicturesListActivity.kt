@@ -1,5 +1,6 @@
 package com.skvoznyak.findart
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.core.content.ContextCompat
@@ -13,11 +14,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import com.skvoznyak.findart.utils.isOnline
 import com.skvoznyak.findart.utils.noConnection
+import com.google.gson.Gson
+
+import com.google.gson.GsonBuilder
+
+
+
 
 
 class SimilarPicturesListActivity : PicturesListActivity() {
 
     private val disposables = CompositeDisposable()
+    private var pictures : List<Picture>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +70,8 @@ class SimilarPicturesListActivity : PicturesListActivity() {
 
     private fun makePictureList(images : List<Picture>) {
 //        hideLoader()
+        Log.d("ivan", "Success!")
+        pictures = images
         setResultList(images)
     }
 
@@ -70,7 +80,7 @@ class SimilarPicturesListActivity : PicturesListActivity() {
         resultList.isNestedScrollingEnabled = true
 
         val headerAdapter = HeaderAdapter(resources.getString(R.string.best_results))
-        val pictureAdapter = PictureAdapter(this, images) { hideLoader() }
+        val pictureAdapter = PictureAdapter(this, images, ::hideLoader, ::openPicture)
         resultList.adapter = ConcatAdapter(headerAdapter, pictureAdapter)
         resultList.layoutManager = LinearLayoutManager(this)
     }
@@ -94,6 +104,19 @@ class SimilarPicturesListActivity : PicturesListActivity() {
     }
 
     override fun createResultList() { }
+
+
+    fun openPicture(title: String) {
+        val picture = pictures?.firstOrNull{ it.title == title } ?: return
+
+        val builder = GsonBuilder()
+        val gson = builder.create()
+        val intent =
+            Intent(this@SimilarPicturesListActivity, PictureActivity::class.java)
+        intent.putExtra("picture", gson.toJson(picture))
+        startActivity(intent)
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
