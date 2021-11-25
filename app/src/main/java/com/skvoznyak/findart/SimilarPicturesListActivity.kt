@@ -70,7 +70,7 @@ class SimilarPicturesListActivity : PicturesListActivity() {
 
     private fun makePictureList(images : List<Picture>) {
 //        hideLoader()
-        Log.d("ivan", "Success!")
+        Log.d("ivan", "Server: Success!")
         pictures = images
         setResultList(images)
     }
@@ -109,12 +109,15 @@ class SimilarPicturesListActivity : PicturesListActivity() {
     fun openPicture(title: String) {
         val picture = pictures?.firstOrNull{ it.title == title } ?: return
 
-        val builder = GsonBuilder()
-        val gson = builder.create()
-        val intent =
-            Intent(this@SimilarPicturesListActivity, PictureActivity::class.java)
-        intent.putExtra("picture", gson.toJson(picture))
-        startActivity(intent)
+        Storage.write(title, picture)
+        Storage.getAll()
+
+//        val builder = GsonBuilder()
+//        val gson = builder.create()
+//        val intent =
+//            Intent(this@SimilarPicturesListActivity, PictureActivity::class.java)
+//        intent.putExtra("picture", gson.toJson(picture))
+//        startActivity(intent)
     }
 
 

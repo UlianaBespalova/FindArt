@@ -66,8 +66,6 @@ class PictureActivity : BaseActivity() {
         } else {
             startActivity(intent, bundle)
         }
-//            val bitmap = ContextCompat.getDrawable(this, R.drawable.picture_mock);
-//                mPhotoView.setImageDrawable(bitmap)
     }
 
     private fun addContent() {

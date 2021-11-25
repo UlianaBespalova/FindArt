@@ -9,7 +9,7 @@ import org.json.JSONObject
 
 object PictureRepository {
 
-    private const val knnBaseUrl = "https://775f-89-222-152-77.ngrok.io"
+    private const val knnBaseUrl = "https://71e4-178-17-205-215.ngrok.io"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(knnBaseUrl)
