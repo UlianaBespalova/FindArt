@@ -1,6 +1,5 @@
 package com.skvoznyak.findart
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.core.content.ContextCompat
@@ -14,12 +13,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import com.skvoznyak.findart.utils.isOnline
 import com.skvoznyak.findart.utils.noConnection
-import com.google.gson.Gson
 
-import com.google.gson.GsonBuilder
-
-
-
+import com.skvoznyak.findart.model.Storage
 
 
 class SimilarPicturesListActivity : PicturesListActivity() {

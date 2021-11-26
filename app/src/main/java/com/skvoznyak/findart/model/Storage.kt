@@ -1,13 +1,8 @@
-package com.skvoznyak.findart
+package com.skvoznyak.findart.model
 
-import android.content.Context
 import android.util.Log
 import com.pacoworks.rxpaper2.RxPaperBook
-import com.skvoznyak.findart.model.Picture
 import io.reactivex.CompletableObserver
-import io.reactivex.Scheduler
-import io.reactivex.Single
-import io.reactivex.SingleOnSubscribe
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 

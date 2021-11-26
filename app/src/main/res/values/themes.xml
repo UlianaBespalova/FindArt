@@ -54,6 +54,13 @@
 
 
 
+    <style name="Theme.FindArt_splash" parent="Theme.FindArt_dark">
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+
+
     <style name="Theme.FindArt.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar"/>
     <style name="Theme.FindArt.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
