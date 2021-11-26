@@ -1,27 +1,26 @@
 package com.skvoznyak.findart
 
-import android.content.Context
 import android.os.Bundle
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import androidx.appcompat.app.AlertDialog
 import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Build
-import android.view.View
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.ViewGroup
-import com.skvoznyak.findart.databinding.PictureScreenFullscreenImageBinding
 import com.skvoznyak.findart.databinding.PictureScreenBinding
-import com.google.gson.Gson
 
 import com.google.gson.GsonBuilder
 import com.skvoznyak.findart.model.Picture
+import com.skvoznyak.findart.model.Storage
 import com.squareup.picasso.Picasso
 
 
 class PictureActivity : BaseActivity() {
 
     private lateinit var pictureBinding: PictureScreenBinding
+    private var varMenu : Menu? = null
+    private var picture: Picture? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +29,12 @@ class PictureActivity : BaseActivity() {
         val pictureJson = intent.extras?.get("picture") as String
         val builder = GsonBuilder()
         val gson = builder.create()
-        val picture: Picture? = gson.fromJson(pictureJson, Picture::class.java)
+        picture = gson.fromJson(pictureJson, Picture::class.java)
 
         if (picture != null) {
-            setData(picture)
+            setData(picture!!)
             pictureBinding.pictureImage.setOnClickListener {
-                openImage(picture.image)
+                openImage(picture!!.image)
             }
         }
     }
@@ -79,5 +78,56 @@ class PictureActivity : BaseActivity() {
                     .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
             )
         )
+    }
+
+    private fun addBookmark() {
+        Log.d("ivan", "add")
+        if (picture != null) {
+            Storage.write(picture!!.title, picture!!)
+            Storage.getAll()
+        }
+    }
+
+    private fun deleteBookmark() {
+        Log.d("ivan", "delete")
+        if (picture != null) {
+            Storage.delete(picture!!.title)
+            Storage.getAll()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        varMenu = menu
+        menu?.findItem(R.id.add_bookmark)?.isVisible = true
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when(item.itemId) {
+            android.R.id.home -> {
+                this.finish()
+                true
+            }
+            R.id.action_bookmarks -> {
+                val intent = Intent(this@PictureActivity, PicturesListActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.add_bookmark -> {
+                item.isVisible = false
+                varMenu?.findItem(R.id.added_bookmark)?.isVisible = true
+                addBookmark()
+                true
+            }
+            R.id.added_bookmark -> {
+                item.isVisible = false
+                varMenu?.findItem(R.id.add_bookmark)?.isVisible = true
+                deleteBookmark()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

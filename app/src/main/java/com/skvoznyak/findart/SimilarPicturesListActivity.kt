@@ -1,5 +1,6 @@
 package com.skvoznyak.findart
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.core.content.ContextCompat
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.fragment.app.FragmentTransaction
+import com.google.gson.GsonBuilder
 import com.skvoznyak.findart.model.PictureRepository
 import com.skvoznyak.findart.model.Picture
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -104,15 +106,12 @@ class SimilarPicturesListActivity : PicturesListActivity() {
     fun openPicture(title: String) {
         val picture = pictures?.firstOrNull{ it.title == title } ?: return
 
-        Storage.write(title, picture)
-        Storage.getAll()
-
-//        val builder = GsonBuilder()
-//        val gson = builder.create()
-//        val intent =
-//            Intent(this@SimilarPicturesListActivity, PictureActivity::class.java)
-//        intent.putExtra("picture", gson.toJson(picture))
-//        startActivity(intent)
+        val builder = GsonBuilder()
+        val gson = builder.create()
+        val intent =
+            Intent(this@SimilarPicturesListActivity, PictureActivity::class.java)
+        intent.putExtra("picture", gson.toJson(picture))
+        startActivity(intent)
     }
 
 

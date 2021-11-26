@@ -6,6 +6,19 @@
         android:icon="@drawable/ic_bookmark_outline_black_24dp"
         android:title="@string/bookmarks"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/add_bookmark"
+        android:icon="@drawable/ic_add_bookmark_outline_black_48dp"
+        android:title="@string/bookmarks"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/added_bookmark"
+        android:icon="@drawable/ic_filled_bookmark_outline_black_48dp"
+        android:title="@string/bookmarks"
+        android:visible="false"
+        app:showAsAction="always" />
 </menu>
 
 <!--TODO: Сделать закрашенную иконку-->
