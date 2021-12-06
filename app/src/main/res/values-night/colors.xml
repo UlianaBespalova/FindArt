@@ -19,6 +19,9 @@
     <color name="divider_secondary_color">#FF222222</color>
 
     <color name="icon_tint_color">#FFFAD59E</color>
+    <color name="ucrop_status_bar_color">#FF000000</color>
+    <color name="ucrop_toolbar_color">#222222</color>
+    <color name="ucrop_toolbar_text_color">#FFFAD59E</color>
 
     <!--    TODO: Удалить, где они используются-->
     <color name="purple_200">#592C2A2B</color>

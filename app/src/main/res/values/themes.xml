@@ -78,7 +78,6 @@
         <item name="android:background">?attr/colorPrimaryVariant</item>
     </style>
 
-
     <style name="ToolbarColoredBackArrow" parent="Theme.FindArt">
         <item name="android:textColorSecondary">@color/icon_tint_color</item>
     </style>

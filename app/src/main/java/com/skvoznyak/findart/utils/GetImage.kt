@@ -172,14 +172,6 @@ open class GetImage : BaseActivity() {
         }
     }
 
-    fun getImageUri(context: Context, bm: Bitmap) : Uri {
-        val bytes = ByteArrayOutputStream()
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path =
-            MediaStore.Images.Media.insertImage(context.contentResolver, bm, "IMG_" + System.currentTimeMillis(), null)
-        return Uri.parse(path)
-    }
-
     fun showImageFromUri(context: Context, imageUri: Uri, view: ImageView) {
         Log.d("ivan", "trying to show")
         val bm: Bitmap =

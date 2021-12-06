@@ -5,16 +5,16 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import com.skvoznyak.findart.databinding.UploadScreenBinding
 import com.skvoznyak.findart.utils.*
 import java.util.*
 import com.yalantis.ucrop.UCrop
 import java.io.File
+import androidx.core.content.ContextCompat
+import com.yalantis.ucrop.UCropActivity
 
 
 class UploadImageActivity : GetImage() {
@@ -30,7 +30,12 @@ class UploadImageActivity : GetImage() {
         val requestCode = intent.extras?.get("requestCode") as Int?
         val data = intent.extras?.get("data") as Intent?
         val currentPhotoPath = intent.extras?.get("currentPhotoPath") as String?
+
         if (requestCode != null) {
+            val newCurrentImageUri = intent.extras?.get("currentImageUri")
+            if (newCurrentImageUri != null) {
+                currentImageUri = Uri.parse("$newCurrentImageUri")
+            }
             processImage(requestCode, currentPhotoPath, data)
             if (bm != null) uploadImageBinding.uploadedImage.setImageBitmap(bm)
         }
@@ -59,27 +64,35 @@ class UploadImageActivity : GetImage() {
     }
 
     private fun startEditing() {
-        if (bm == null) {
+        if (bm == null || currentImageUri == null) {
             return
         }
-        val imageUri = getImageUri(this, bm!!)
-        Log.d("ivan", "OK!")
-        openCropActivity(imageUri, imageUri, bm!!.height, bm!!.width)
-
+        val destinationUri = Uri.fromFile(File(cacheDir, "IMG_FindArt_" + System.currentTimeMillis()))
+        openCropActivity(currentImageUri!!, destinationUri, bm!!.height, bm!!.width)
     }
+
 
     fun openCropActivity(sourceUri: Uri, destinationUri: Uri, maxHeight: Int, maxWidth: Int) {
         try {
-            UCrop.of(sourceUri, destinationUri)
+            var uCrop = UCrop.of(sourceUri, destinationUri)
                 .withMaxResultSize(maxWidth, maxHeight)
-                .start(this)
-            val file: File = File(sourceUri.path!!)
-            val deleted = file.delete()
-            Log.d("ivan", "Del: ${deleted}")
+            uCrop = advancedConfig(uCrop)
+            uCrop.start(this)
         } catch (e: Exception) {
-            Log.d("ivan", "error in ucrop of")
+            Log.d("ivan", "UCrop: error while oppening activity")
             e.printStackTrace()
         }
+    }
+
+    private fun advancedConfig(uCrop: UCrop): UCrop? {
+        val options = UCrop.Options()
+        options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL)
+        options.setToolbarColor(ContextCompat.getColor(this, R.color.ucrop_toolbar_color))
+        options.setStatusBarColor(ContextCompat.getColor(this, R.color.ucrop_status_bar_color))
+        options.setToolbarWidgetColor(ContextCompat.getColor(this, R.color.ucrop_toolbar_text_color))
+        options.setRootViewBackgroundColor(ContextCompat.getColor(this, R.color.ucrop_background_color))
+        options.setActiveControlsWidgetColor(ContextCompat.getColor(this, R.color.color_secondary))
+        return uCrop.withOptions(options)
     }
 
     private fun findPicture() {
@@ -95,7 +108,6 @@ class UploadImageActivity : GetImage() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
-            Log.d("ivan", "OKKK we are in crop result")
             val imageUri = data?.let { UCrop.getOutput(it) }
             val imageView = uploadImageBinding.uploadedImage
             if (imageUri != null) {
