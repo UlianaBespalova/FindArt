@@ -4,23 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_dark"
+    android:background="@color/picture_background"
     >
-
-
     <com.github.chrisbanes.photoview.PhotoView
-
         android:id="@+id/fullscreen_image_view"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:transitionName="open_image"
         android:src="@drawable/picture_mock2"
         tools:src="@drawable/picture_mock2"
         />
-
-
-
 </FrameLayout>
 

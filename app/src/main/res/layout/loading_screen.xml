@@ -10,6 +10,7 @@
     <com.skvoznyak.findart.utils.LoadingBar
         android:id="@+id/horizontalDottedProgress"
         android:layout_width="wrap_content"
+        android:layout_marginBottom="50sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -42,21 +42,21 @@ class LoadingBar : View {
     private fun createDot(canvas: Canvas, paint: Paint) {
         for (i in 0 until dotAmount) {
             if (i == dotPosition) {
-                paint.color = Color.parseColor("#11FFF0C8")
+                paint.color = Color.parseColor("#11FFECB8")
                 canvas.drawCircle(
                     (2 * dotRadius + i * dotsDistributionX),
                     bounceDotRadius.toFloat(),
                     bounceDotRadius.toFloat(),
                     paint)
 
-                paint.color = Color.parseColor("#55FFF0C8")
+                paint.color = Color.parseColor("#55FFECB8")
                 canvas.drawCircle(
                     (2 * dotRadius + i * dotsDistributionX),
                     bounceDotRadius.toFloat(),
                     dotRadius.toFloat()+3,
                     paint)
 
-                paint.color = Color.parseColor("#FFFFF0C8")
+                paint.color = Color.parseColor("#FFFFECB8")
                 canvas.drawCircle(
                     (2 * dotRadius + i * dotsDistributionX),
                     bounceDotRadius.toFloat(),

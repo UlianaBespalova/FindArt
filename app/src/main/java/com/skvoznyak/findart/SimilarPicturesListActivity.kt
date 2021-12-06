@@ -1,8 +1,12 @@
 package com.skvoznyak.findart
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.WindowDecorActionBar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,13 +20,11 @@ import io.reactivex.disposables.CompositeDisposable
 import com.skvoznyak.findart.utils.isOnline
 import com.skvoznyak.findart.utils.noConnection
 
-import com.skvoznyak.findart.model.Storage
+import com.skvoznyak.findart.model.StorageManager
+import com.skvoznyak.findart.utils.isNightMode
 
 
 class SimilarPicturesListActivity : PicturesListActivity() {
-
-    private val disposables = CompositeDisposable()
-    private var pictures : List<Picture>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +68,6 @@ class SimilarPicturesListActivity : PicturesListActivity() {
     }
 
     private fun makePictureList(images : List<Picture>) {
-//        hideLoader()
         Log.d("ivan", "Server: Success!")
         pictures = images
         setResultList(images)
@@ -83,12 +84,20 @@ class SimilarPicturesListActivity : PicturesListActivity() {
     }
 
     private fun showLoader() {
+        showToolbar(false)
+        if (!isNightMode(resources.configuration.uiMode)) {
+            setStatusBarColor(R.color.status_bar_color)
+        }
         supportFragmentManager.beginTransaction()
             .replace(R.id.listScreenContainer, LoadingFragment(), "LoadingFragment")
             .commit()
     }
 
     private fun hideLoader() {
+        showToolbar(true)
+        if (!isNightMode(resources.configuration.uiMode)) {
+            setStatusBarColor(R.color.color_primary_variant)
+        }
         val fragment = supportFragmentManager.findFragmentByTag("LoadingFragment")
         if (fragment != null && fragment.isVisible) {
             supportFragmentManager.beginTransaction()
@@ -96,27 +105,8 @@ class SimilarPicturesListActivity : PicturesListActivity() {
                 .hide(fragment)
                 .commit()
         }
-        supportActionBar?.setBackgroundDrawable(ContextCompat
-            .getDrawable(this, R.color.beige_normal) )
     }
 
     override fun createResultList() { }
-
-
-    fun openPicture(title: String) {
-        val picture = pictures?.firstOrNull{ it.title == title } ?: return
-
-        val builder = GsonBuilder()
-        val gson = builder.create()
-        val intent =
-            Intent(this@SimilarPicturesListActivity, PictureActivity::class.java)
-        intent.putExtra("picture", gson.toJson(picture))
-        startActivity(intent)
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposables.dispose()
-    }
+    override fun addMenuTitle() { }
 }

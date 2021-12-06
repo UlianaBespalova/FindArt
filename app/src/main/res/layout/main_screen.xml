@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/beige_normal">
+    android:layout_height="match_parent" >
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal1"
@@ -46,7 +45,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/avenir_light"
         android:text="@string/app_title_find"
-        android:textColor="@color/dark_gray"
         android:textSize="65sp"
         app:layout_constraintBaseline_toTopOf="@id/guideline_horizontal1"
         app:layout_constraintEnd_toStartOf="@id/app_title_dot" />
@@ -57,7 +55,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/avenir_light"
         android:text="@string/dot"
-        android:textColor="@color/dark_gray"
         android:textSize="70sp"
         android:layout_marginStart="5dp"
         app:layout_constraintBaseline_toTopOf="@id/guideline_horizontal1"
@@ -71,7 +68,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/avenir_light"
         android:text="@string/app_title_art"
-        android:textColor="@color/dark_gray"
         android:textSize="65sp"
         app:layout_constraintBottom_toBottomOf="@+id/app_title_dot"
         app:layout_constraintStart_toEndOf="@id/app_title_dot"
@@ -85,7 +81,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/gill_sans"
         android:text="@string/choose_image"
-        android:textColor="@color/dark_gray"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
@@ -100,7 +95,7 @@
         android:contentDescription="@string/bookmarks"
         android:focusable="true"
         app:srcCompat="@drawable/ic_bookmark_outline_black_24dp"
-        app:backgroundTint="@color/transparent_white"
+        app:backgroundTint="@color/floating_button_color"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.skvoznyak.findart
 
+import android.content.Context
 import android.os.Bundle
 import android.content.Intent
 import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
@@ -12,7 +13,7 @@ import com.skvoznyak.findart.databinding.PictureScreenBinding
 
 import com.google.gson.GsonBuilder
 import com.skvoznyak.findart.model.Picture
-import com.skvoznyak.findart.model.Storage
+import com.skvoznyak.findart.model.StorageManager
 import com.squareup.picasso.Picasso
 
 
@@ -43,7 +44,7 @@ class PictureActivity : BaseActivity() {
         pictureBinding.pictureTitle.text = picture.title
         pictureBinding.picturePainter.text = picture.painter
         pictureBinding.pictureYear.text = picture.year
-        val text = "\t\t\t\t${picture.text.replace("*", "\n\n\t\t\t\t")}"
+        val text = "\t\t\t\t${picture.text.replace("*", "\n\n\t\t\t\t")}\n\n"
         pictureBinding.pictureText.text = text
 
         Picasso.with(this@PictureActivity).load(picture.image)
@@ -83,23 +84,28 @@ class PictureActivity : BaseActivity() {
     private fun addBookmark() {
         Log.d("ivan", "add")
         if (picture != null) {
-            Storage.write(picture!!.title, picture!!)
-            Storage.getAll()
+            StorageManager.write(picture!!.title, picture!!)
         }
     }
 
     private fun deleteBookmark() {
         Log.d("ivan", "delete")
         if (picture != null) {
-            Storage.delete(picture!!.title)
-            Storage.getAll()
+            StorageManager.delete(picture!!.title)
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         varMenu = menu
-        menu?.findItem(R.id.add_bookmark)?.isVisible = true
+
+        fun setMenuItem(isAdded: Boolean) {
+            if (isAdded) { menu?.findItem(R.id.added_bookmark)?.isVisible = true }
+            else { menu?.findItem(R.id.add_bookmark)?.isVisible = true }
+        }
+        if (picture != null) {
+            StorageManager.contains(picture!!.title, ::setMenuItem)
+        }
         return true
     }
 

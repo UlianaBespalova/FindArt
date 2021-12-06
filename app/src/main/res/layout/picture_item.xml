@@ -15,7 +15,8 @@
         android:contentDescription="@string/best_results"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/beige_additional" />
+        android:background="@drawable/mock"
+         />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/item_image_shape"
@@ -31,10 +32,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"
-        android:ellipsize="end"
+        android:ellipsize="marquee"
+        android:singleLine="true"
         android:fontFamily="@font/baskerville"
-        android:maxLines="1"
-        android:textColor="@color/white"
+        android:textColor="@color/color_dialog"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/item_picture_painter"
@@ -48,10 +49,10 @@
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginHorizontal="11dp"
-        android:ellipsize="end"
+        android:ellipsize="marquee"
+        android:singleLine="true"
         android:fontFamily="@font/baskerville"
-        android:maxLines="1"
-        android:textColor="@color/white"
+        android:textColor="@color/color_dialog"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="@id/item_picture"
         app:layout_constraintEnd_toEndOf="@id/item_picture"
@@ -66,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="10dp"
-        tools:background="@color/beige_additional"
+        tools:background="@color/color_primary_variant"
         android:src="@drawable/ic_close_grey600_18dp"
         />
 

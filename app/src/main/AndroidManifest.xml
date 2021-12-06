@@ -16,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FindArt"
+        android:requestLegacyExternalStorage="true"
         >
         <activity
             android:name=".SplashScreen"
@@ -23,7 +24,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.FindArt_splash"
             >
-<!--            "@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen"-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -63,7 +63,12 @@
             />
         <activity
             android:name=".FullScreenActivity"
-            android:theme="@style/Theme.FindArt_animation"
+            android:theme="@style/Theme.FindArt_animation_full"
+            />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
 
         <provider

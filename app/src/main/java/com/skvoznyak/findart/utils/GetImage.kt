@@ -4,20 +4,28 @@ import android.Manifest
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
+import android.view.ContextThemeWrapper
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.skvoznyak.findart.BaseActivity
+import com.skvoznyak.findart.R
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 
@@ -37,6 +45,7 @@ open class GetImage : BaseActivity() {
     private lateinit var storageDirectory: File
     private lateinit var imageFile: File
     lateinit var currentPhotoPath: String
+    var currentImageUri: Uri? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +62,7 @@ open class GetImage : BaseActivity() {
             when (requestCode) {
                 activityResCodeSelectFile -> {
                     onSelectFromGalleryResult(data)
+                    currentImageUri = data?.data
                 }
                 activityResCodeRequestCamera -> {
                     onCaptureImageResult()
@@ -99,7 +109,7 @@ open class GetImage : BaseActivity() {
     }
 
     fun selectImage() {
-        val builder = AlertDialog.Builder(this)
+        val builder = MaterialAlertDialogBuilder(this, R.style.DialogTheme)
         builder.setTitle(titleAddPhoto)
         builder.setItems(actions) { dialog, item ->
             val result = checkPermission(this)
@@ -122,6 +132,8 @@ open class GetImage : BaseActivity() {
 
     private fun cameraIntent() {
         val imageUri = FileProvider.getUriForFile(this@GetImage, "com.skvoznyak.findart.fileprovider", imageFile)
+        currentImageUri = imageUri
+
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
         startActivityForResult(intent, activityResCodeRequestCamera)
@@ -139,7 +151,7 @@ open class GetImage : BaseActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    val alertBuilder = AlertDialog.Builder(context)
+                    val alertBuilder = MaterialAlertDialogBuilder(context, R.style.DialogTheme)
                     alertBuilder.setCancelable(true)
                     alertBuilder.setTitle("Требуется разрешение")
                     alertBuilder.setMessage("Для выполнения действия приложению необходим доступ к фото")
@@ -158,5 +170,20 @@ open class GetImage : BaseActivity() {
         } else {
             return true
         }
+    }
+
+    fun getImageUri(context: Context, bm: Bitmap) : Uri {
+        val bytes = ByteArrayOutputStream()
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path =
+            MediaStore.Images.Media.insertImage(context.contentResolver, bm, "IMG_" + System.currentTimeMillis(), null)
+        return Uri.parse(path)
+    }
+
+    fun showImageFromUri(context: Context, imageUri: Uri, view: ImageView) {
+        Log.d("ivan", "trying to show")
+        val bm: Bitmap =
+            MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri)
+        view.setImageBitmap(bm)
     }
 }
