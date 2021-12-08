@@ -1,12 +1,18 @@
 package com.skvoznyak.findart
 
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.WindowDecorActionBar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.fragment.app.FragmentTransaction
+import com.google.gson.GsonBuilder
 import com.skvoznyak.findart.model.PictureRepository
 import com.skvoznyak.findart.model.Picture
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,10 +20,11 @@ import io.reactivex.disposables.CompositeDisposable
 import com.skvoznyak.findart.utils.isOnline
 import com.skvoznyak.findart.utils.noConnection
 
+import com.skvoznyak.findart.model.StorageManager
+import com.skvoznyak.findart.utils.isNightMode
+
 
 class SimilarPicturesListActivity : PicturesListActivity() {
-
-    private val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +68,8 @@ class SimilarPicturesListActivity : PicturesListActivity() {
     }
 
     private fun makePictureList(images : List<Picture>) {
-//        hideLoader()
+        Log.d("ivan", "Server: Success!")
+        pictures = images
         setResultList(images)
     }
 
@@ -70,18 +78,26 @@ class SimilarPicturesListActivity : PicturesListActivity() {
         resultList.isNestedScrollingEnabled = true
 
         val headerAdapter = HeaderAdapter(resources.getString(R.string.best_results))
-        val pictureAdapter = PictureAdapter(this, images) { hideLoader() }
+        val pictureAdapter = PictureAdapter(this, images, ::hideLoader, ::openPicture)
         resultList.adapter = ConcatAdapter(headerAdapter, pictureAdapter)
         resultList.layoutManager = LinearLayoutManager(this)
     }
 
     private fun showLoader() {
+        showToolbar(false)
+        if (!isNightMode(resources.configuration.uiMode)) {
+            setStatusBarColor(R.color.status_bar_color)
+        }
         supportFragmentManager.beginTransaction()
             .replace(R.id.listScreenContainer, LoadingFragment(), "LoadingFragment")
             .commit()
     }
 
     private fun hideLoader() {
+        showToolbar(true)
+        if (!isNightMode(resources.configuration.uiMode)) {
+            setStatusBarColor(R.color.color_primary_variant)
+        }
         val fragment = supportFragmentManager.findFragmentByTag("LoadingFragment")
         if (fragment != null && fragment.isVisible) {
             supportFragmentManager.beginTransaction()
@@ -89,14 +105,8 @@ class SimilarPicturesListActivity : PicturesListActivity() {
                 .hide(fragment)
                 .commit()
         }
-        supportActionBar?.setBackgroundDrawable(ContextCompat
-            .getDrawable(this, R.color.beige_normal) )
     }
 
     override fun createResultList() { }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposables.dispose()
-    }
+    override fun addMenuTitle() { }
 }

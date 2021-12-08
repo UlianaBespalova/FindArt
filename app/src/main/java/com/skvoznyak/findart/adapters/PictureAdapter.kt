@@ -2,6 +2,7 @@ package com.skvoznyak.findart
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,13 @@ import com.squareup.picasso.Picasso
 
 
 class PictureAdapter(val context: Context, private val pictures: List<Picture>,
-                     private val callback: (() -> Unit)?):
-    Adapter<PictureAdapter.PictureViewHolder>() {
+                     private val callback: (() -> Unit)?,
+                     private val clickHandler: ((String) -> Unit)?):
+    Adapter<PictureAdapter.PictureViewHolder>(), View.OnClickListener  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.picture_item, parent, false)
+        view.setOnClickListener(this)
         return PictureViewHolder(view)
     }
 
@@ -31,6 +34,14 @@ class PictureAdapter(val context: Context, private val pictures: List<Picture>,
     }
 
     override fun getItemCount(): Int = pictures.size
+
+    override fun onClick(itemView: View) {
+        Log.d("ivan", "Click!")
+        val titleView : TextView = itemView.findViewById(R.id.item_picture_title)
+        if (clickHandler != null) {
+            clickHandler!!(titleView.text as String)
+        }
+    }
 
 
     class PictureViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

@@ -9,8 +9,12 @@ data class Picture(
     val title: String,
     @SerializedName("painter")
     val painter: String,
+    @SerializedName("year")
+    val year: String,
     @SerializedName("image")
     val image: String,
+    @SerializedName("text")
+    val text: String,
 )
 
 

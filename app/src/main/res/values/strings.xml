@@ -20,4 +20,5 @@
 
     <string name="best_results">Лучшее совпадение</string>
     <string name="no_results">Совпадения не найдены</string>
+    <string name="no_bookmarks">Здесь пока нет закладок</string>
 </resources>

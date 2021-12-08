@@ -1,6 +1,7 @@
 package com.skvoznyak.findart.utils
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.view.Gravity
 import android.widget.Toast

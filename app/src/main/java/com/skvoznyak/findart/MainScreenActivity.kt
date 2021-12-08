@@ -4,9 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import androidx.appcompat.app.AppCompatDelegate
 import com.skvoznyak.findart.databinding.MainScreenBinding
 import com.skvoznyak.findart.utils.GetImage
+import com.skvoznyak.findart.utils.SharedPref
 
 
 class MainScreenActivity : GetImage() {
@@ -14,6 +17,16 @@ class MainScreenActivity : GetImage() {
     lateinit var mainScreenBinding : MainScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+//        if (SharedPref.loadNightModeState()) {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        }
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+
+
+
         super.onCreate(savedInstanceState)
 
         mainScreenBinding.buttonBookmarks.setOnClickListener {
@@ -39,6 +52,7 @@ class MainScreenActivity : GetImage() {
             intent.putExtra("requestCode", requestCode)
             intent.putExtra("data", data)
             intent.putExtra("currentPhotoPath", currentPhotoPath)
+            intent.putExtra("currentImageUri", currentImageUri)
             startActivity(intent)
         }
     }
@@ -52,7 +66,7 @@ class MainScreenActivity : GetImage() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.let {
                 it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-                window.navigationBarColor = getColor(R.color.beige_normal)
+                window.navigationBarColor = getColor(R.color.color_primary)
                 it.hide(WindowInsets.Type.systemBars())
             }
         } else {

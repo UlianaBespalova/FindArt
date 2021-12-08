@@ -1,9 +1,12 @@
 package com.skvoznyak.findart
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.skvoznyak.findart.databinding.ActivityMainBinding
 import com.skvoznyak.findart.databinding.LayoutToolbarBinding
 
@@ -60,5 +63,20 @@ open class BaseActivity : AppCompatActivity() {
     protected fun showNotFound() {
         val imageView = findViewById<View>(R.id.not_found_picture)
         imageView?.visibility = View.VISIBLE
+    }
+
+    protected fun showToolbar(flag: Boolean) {
+        val imageView = findViewById<View>(R.id.appBarLayout)
+        if (flag) {
+            imageView?.visibility = View.VISIBLE
+        } else {
+            imageView?.visibility = View.INVISIBLE
+        }
+    }
+
+    protected fun setStatusBarColor(colorInt: Int) {
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this, colorInt)
     }
 }
