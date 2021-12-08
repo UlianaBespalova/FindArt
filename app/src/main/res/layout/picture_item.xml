@@ -60,17 +60,6 @@
         app:layout_constraintTop_toBottomOf="@id/item_picture_title"
         tools:text="Pablo Picasso" />
 
-    <ImageView
-        android:id="@+id/item_bookmark_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="10dp"
-        tools:background="@color/color_primary_variant"
-        android:src="@drawable/ic_close_grey600_18dp"
-        />
-
     <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

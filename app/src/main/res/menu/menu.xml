@@ -8,25 +8,25 @@
         android:visible="false"
         app:showAsAction="always" />
 
+
     <item
-        android:id="@+id/action_bookmarks"
-        android:icon="@drawable/ic_bookmark_outline_black_24dp"
+        android:id="@+id/added_bookmark"
+        android:icon="@drawable/ic_close_black_24dp"
         android:title="@string/bookmarks"
+        android:visible="false"
         app:iconTint= "@color/icon_tint_color"
         app:showAsAction="always" />
     <item
         android:id="@+id/add_bookmark"
-        android:icon="@drawable/ic_add_bookmark_outline_black_48dp"
+        android:icon="@drawable/icons8_plus_math_36"
         android:title="@string/bookmarks"
         android:visible="false"
         app:iconTint= "@color/icon_tint_color"
         app:showAsAction="always" />
-
     <item
-        android:id="@+id/added_bookmark"
-        android:icon="@drawable/ic_filled_bookmark_outline_black_48dp"
+        android:id="@+id/action_bookmarks"
+        android:icon="@drawable/ic_bookmark_outline_black_24dp"
         android:title="@string/bookmarks"
-        android:visible="false"
         app:iconTint= "@color/icon_tint_color"
         app:showAsAction="always" />
 </menu>
