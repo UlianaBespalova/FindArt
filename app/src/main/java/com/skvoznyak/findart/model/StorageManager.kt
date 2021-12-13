@@ -37,7 +37,6 @@ object StorageManager {
                 .toList()
     }
 
-
     fun delete(key : String) {
         val delete = book.delete(key)
         delete.subscribe(object : CompletableObserver {

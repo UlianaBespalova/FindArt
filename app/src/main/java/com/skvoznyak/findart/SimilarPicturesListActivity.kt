@@ -1,26 +1,16 @@
 package com.skvoznyak.findart
 
-import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
-import android.view.WindowManager
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.WindowDecorActionBar
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.fragment.app.FragmentTransaction
-import com.google.gson.GsonBuilder
 import com.skvoznyak.findart.model.PictureRepository
 import com.skvoznyak.findart.model.Picture
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import com.skvoznyak.findart.utils.isOnline
 import com.skvoznyak.findart.utils.noConnection
-
-import com.skvoznyak.findart.model.StorageManager
 import com.skvoznyak.findart.utils.isNightMode
 
 

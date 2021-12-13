@@ -1,16 +1,13 @@
 package com.skvoznyak.findart
 
-import android.content.Context
 import android.os.Bundle
 import android.content.Intent
 import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Build
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
 import com.skvoznyak.findart.databinding.PictureScreenBinding
-
 import com.google.gson.GsonBuilder
 import com.skvoznyak.findart.model.Picture
 import com.skvoznyak.findart.model.StorageManager
@@ -82,14 +79,12 @@ class PictureActivity : BaseActivity() {
     }
 
     private fun addBookmark() {
-        Log.d("ivan", "add")
         if (picture != null) {
             StorageManager.write(picture!!.title, picture!!)
         }
     }
 
     private fun deleteBookmark() {
-        Log.d("ivan", "delete")
         if (picture != null) {
             StorageManager.delete(picture!!.title)
         }
