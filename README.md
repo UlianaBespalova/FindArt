@@ -13,3 +13,10 @@ Android-приложение использует технологию ML для
     
     
 - Поиск похожих изображений: [https://github.com/UlianaBespalova/ArtRecognition](https://github.com/UlianaBespalova/ArtRecognition)
+		
+		  
+			
+.		
+  
+	
+Источник шаблона: [https://github.com/mailru-android-edu/common](https://github.com/mailru-android-edu/common)
