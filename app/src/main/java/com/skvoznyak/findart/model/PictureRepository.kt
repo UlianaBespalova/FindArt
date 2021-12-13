@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object PictureRepository {
 
-    private const val knnBaseUrl = "https://a63c-185-165-219-190.ngrok.io"
+    private const val knnBaseUrl = "https://c3d4-178-17-201-58.ngrok.io"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(knnBaseUrl)
