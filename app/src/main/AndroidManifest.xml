@@ -62,7 +62,6 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             />
-
         <provider
             android:authorities="com.skvoznyak.findart.fileprovider"
             android:name="androidx.core.content.FileProvider"
@@ -72,7 +71,6 @@
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
         </provider>
-
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="label" />

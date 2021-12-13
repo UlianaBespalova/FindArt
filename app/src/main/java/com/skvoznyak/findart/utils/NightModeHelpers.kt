@@ -3,8 +3,6 @@ package com.skvoznyak.findart.utils
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
-import android.content.res.Resources
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 
 object SharedPref {
@@ -20,18 +18,15 @@ object SharedPref {
         editor.putBoolean("NightMode", state)
         editor.commit()
         if (state) {
-            Log.d("ivan", "night SET !!!")
             setNightMode()
         } else {
-            Log.d("ivan", "light SET !!!")
             setLightMode()
         }
     }
 
-    fun loadNightModeState() : Boolean {
+    fun loadNightModeState(): Boolean {
         if (mySharePref == null) return false
-        val state = mySharePref!!.getBoolean("NightMode",false)
-        return state
+        return mySharePref!!.getBoolean("NightMode", false)
     }
 
     private fun setNightMode() {

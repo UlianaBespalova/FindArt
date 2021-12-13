@@ -1,13 +1,9 @@
 package com.skvoznyak.findart
 
-import android.content.ContentResolver
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
@@ -39,7 +35,6 @@ open class PicturesListActivity : BaseActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ pics ->
                 if (pics.isNotEmpty()) {
-                    Log.d("ivan", "okokok ${pics.size}")
                     pictures = pics
                     setResultList()
 
@@ -72,7 +67,6 @@ open class PicturesListActivity : BaseActivity() {
     }
 
     open fun createResultList(){
-        Log.d("ivan", "in createResList")
         StorageManager.getAll(::makePictureList)
     }
 
@@ -109,8 +103,6 @@ open class PicturesListActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
-//        Log.d("ivan", "DDDDDDD")
-//        varMenu?.findItem(R.id.bookmarks_title)?.isVisible = false
         super.onDestroy()
         disposables.dispose()
     }

@@ -9,7 +9,6 @@ class FindArtApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         SharedPref.setContext(this)
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
         RxPaperBook.init(this)
     }

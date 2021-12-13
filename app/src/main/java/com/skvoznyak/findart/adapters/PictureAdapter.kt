@@ -26,8 +26,6 @@ class PictureAdapter(val context: Context, private val pictures: List<Picture>,
     }
 
     override fun onBindViewHolder(holder: PictureViewHolder, position: Int) {
-
-// TODO: Решить вопрос с лоадером
         if (position == 0)
             holder.bind(pictures[position], context, callback)
         else holder.bind(pictures[position], context, null)
